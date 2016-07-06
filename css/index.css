@@ -1,0 +1,125 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css");
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+}
+
+.centered {
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    margin-top: -75px;
+}
+
+section {
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 4rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #999;
+    font-size: 1.25rem;
+}
+
+a {
+    text-decoration: inherit;
+    color: #87ceeb;
+}
+
+a:hover {
+    color: #549bb8;
+}
+
+footer {
+    color: #999;
+    font-size: .75rem;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: -40px;
+}
+
+p {
+    margin: 0 10%;
+}
+
+em {
+    color: #f33;
+}
+
+.contact {
+  margin-top: 15px;
+}
+
+form input {
+  font-size: 14pt;
+  font-family: "Open Sans";
+  padding: 4px;
+  border: 0;
+  border-bottom: 1px solid rgba(33, 33, 33, 0.2);
+  margin: 0 10px 10px 10px;
+  width: 200px;
+}
+
+form input:focus {
+  outline: none;
+  border-bottom: 1px solid #e74c3c;
+  color: #e74c3c;
+}
+
+form select {
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background-color: transparent;
+  font-size: 14pt;
+  font-family: "Open Sans";
+  color: #999;
+  border-radius: 0;
+  padding: 4px;
+  border: 0;
+  border-bottom: 1px solid rgba(33, 33, 33, 0.2);
+  margin: 0 10px 10px 10px;
+  width: 210px;
+
+}
+
+form select option:first-child {
+  color: #999;
+}
+
+form select:focus {
+  outline: none;
+  border-bottom: 1px solid #e74c3c;
+  color: #e74c3c;
+}
+
+form textarea {
+  resize: none;
+  font-size: 14pt;
+  font-family: "Open Sans";
+  width: 440px;
+  margin-top: 10px;
+  border: 0;
+  border-bottom: 1px solid rgba(33, 33, 33, 0.2);
+  height: 100px;
+}
+
+form textarea:focus {
+  outline:none;
+  border-bottom: 1px solid #e74c3c;
+  color: #e74c3c;
+  color: #999;
+}
