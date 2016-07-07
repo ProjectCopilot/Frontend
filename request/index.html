@@ -12,7 +12,7 @@
           <div class="two columns"></div>
           <div class="eight columns" id="requestForm">
             <h1>Get Help</h1>
-            <h3>We're here to help.</h3>
+            <h3>We're here to help. <span id="message"></span></h3>
             <form class="contact">
               <div class="row">
                 <div class="half columns">
@@ -26,8 +26,8 @@
                   </select>
                   <select name="preferredComm">
                     <option value="" disabled selected>Preferred Contact</option>
-                    <option value="female">Email</option>
-                    <option value="male">SMS</option>
+                    <option value="email">Email</option>
+                    <option value="sms">SMS</option>
                   </select>
                   <input type="text" name="contact" placeholder="Contact" /><br />
                 </div>
@@ -37,7 +37,7 @@
               </div>
               <div class="row">
                 <div class="whole columns">
-                  <input type="submit" value="Request"/>
+                  <button id="submit">Request</button>
                 </div>
               </div>
             </form>
@@ -54,20 +54,33 @@
         <script>
           // prevent form from redirecting/refreshing on submit
           $(function() {
-              $('form').submit(function() {
-                  $.ajax({
-                      type: 'POST',
-                      url: 'submit.php',
-                      data: {
-                              "name": $(this).name.value,
-                              "age": $(this).password.value,
-                              "gender": $(this).gender.value,
-                              "contactMethod": $(this).preferredComm.value,
-                              "contact": $(this).contact.value,
-                              "situation": $(this).situation.value
-                            }
-                  });
-                  return false;
+              $('#submit').click(function() {
+                var d = {
+                  "name": $(".contact input[name=name]").val(),
+                  "age": $("form input[name=age]").val(),
+                  "gender": $("form select[name=gender]").val(),
+                  "contactMethod": $("form select[name=preferredComm]").val(),
+                  "contact": $("form input[name=contact]").val(),
+                  "situation": $("form textarea[name=situation]").val()
+                };
+
+                $.ajax({
+              	  type: "POST",
+              	  url: "http://localhost:3000/api/addUserRequest",
+              	  data: d,
+              	  error: function(err) { // I have no clue why, but the response gets passed through the error method
+                    if (err.status == 200) {
+                      $("#message").html('<span style="color:green;">Successfully submitted.</span>');
+                      $(".contact")[0].reset();
+                    } else {
+                      console.log(err);
+                      $("#message").html('<span style="color:red;">There was an error submitting.</span>');
+                    }
+              	  },
+              	  dataType: 'json',
+              	});
+
+                return false;
               });
             });
         </script>
