@@ -57,12 +57,14 @@
               $('#submit').click(function() {
                 var d = {
                   "name": $(".contact input[name=name]").val(),
-                  "age": $("form input[name=age]").val(),
+                  "age": isNaN(parseInt($("form input[name=age]").val(), 10)) ? "error" : parseInt($("form input[name=age]").val(), 10),
                   "gender": $("form select[name=gender]").val(),
                   "contactMethod": $("form select[name=preferredComm]").val(),
                   "contact": $("form input[name=contact]").val(),
                   "situation": $("form textarea[name=situation]").val()
                 };
+
+                console.log(d);
 
                 $.ajax({
               	  type: "POST",
