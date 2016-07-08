@@ -66,11 +66,25 @@ em {
 form input {
   font-size: 14pt;
   font-family: "Open Sans";
-  padding: 4px;
+  padding: 8px 50px 8px 8px;
   border: 0;
   border-bottom: 2px solid rgba(33, 33, 33, 0.2);
   margin: 0 0px 15px 0px;
-  width: 100%;
+  width: -webkit-calc(100% - 50px);
+  width: calc(100% - 50px);
+}
+
+form #mainFieldSubmit {
+    margin-left: -50px;
+    font-size: 14pt;
+    padding: 8px;
+    font-family: "Open Sans";
+    width: 50px;
+    background: #e74c3c;
+    color: white;
+    border:0;
+    border-bottom: 2px solid transparent;
+    -webkit-appearance: none;
 }
 
 form input:focus {
@@ -133,6 +147,14 @@ form textarea:focus {
   /*border-bottom: 2px solid #e74c3c;*/
   color: #e74c3c;
   color: #999;
+}
+
+form button:hover {
+  cursor:pointer;
+}
+
+form button:focus {
+  outline:none;
 }
 
 #requestForm {

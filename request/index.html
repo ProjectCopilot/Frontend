@@ -8,16 +8,17 @@
         <title>Copilot Request</title>
     </head>
     <body>
+      <section class="centered">
         <div class="row">
           <div class="two columns"></div>
           <div class="eight columns" id="requestForm">
             <h1>Get Help</h1>
-            <h3>We're here to help. <span id="message"></span></h3>
+            <h3 id="helper">What's your name?</h3>
             <form class="contact">
               <div class="row">
-                <div class="half columns">
-                  <input type="text" name="name" placeholder="Your Name"/>
-                  <input type="text" name="age" placeholder="Age"/>
+                <div class="whole columns">
+                  <input type="text" name="name" id="mainField" placeholder="Your Name"/><button class="inputButton" id="mainFieldSubmit">OK</button>
+                  <!-- <input type="text" name="age" placeholder="Age"/>
                   <select name="gender">
                     <option value="" disabled selected>Gender</option>
                     <option value="female">Female</option>
@@ -31,58 +32,25 @@
                   </select>
                   <input type="text" name="contact" placeholder="Contact" /><br />
                 </div>
-                <div class="half columns">
-                  <textarea name="situation" placeholder="Describe your situation..."></textarea>
+                <textarea name="situation" placeholder="Describe your situation..."></textarea> -->
                 </div>
               </div>
               <div class="row">
                 <div class="whole columns">
-                  <button id="submit">Request</button>
+                  <!-- <button id="submit">Request</button> -->
                 </div>
               </div>
             </form>
           </div>
           <div class="two columns"></div>
         </div>
-
+      </section>
 
         <footer>
             <p>If you or a friend are in immediate danger, call <em>911</em> or local emergency services.</p>
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-        <script>
-          // prevent form from redirecting/refreshing on submit
-          $(function() {
-              $('#submit').click(function() {
-                var d = {
-                  "name": $(".contact input[name=name]").val(),
-                  "age": $("form input[name=age]").val(),
-                  "gender": $("form select[name=gender]").val(),
-                  "contactMethod": $("form select[name=preferredComm]").val(),
-                  "contact": $("form input[name=contact]").val(),
-                  "situation": $("form textarea[name=situation]").val()
-                };
-
-                $.ajax({
-              	  type: "POST",
-              	  url: "http://localhost:3000/api/addUserRequest",
-              	  data: d,
-              	  error: function(err) { // I have no clue why, but the response gets passed through the error method
-                    if (err.status == 200) {
-                      $("#message").html('<span style="color:green;">Successfully submitted.</span>');
-                      $(".contact")[0].reset();
-                    } else {
-                      console.log(err);
-                      $("#message").html('<span style="color:red;">There was an error submitting.</span>');
-                    }
-              	  },
-              	  dataType: 'json',
-              	});
-
-                return false;
-              });
-            });
-        </script>
+        <script src="js/main.js"></script>
     </body>
 </html>
