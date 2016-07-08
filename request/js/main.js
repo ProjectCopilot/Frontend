@@ -1,7 +1,18 @@
-
 $(function() {
-    
+    var helper = $("#helper");
+    var mainInput = $("#mainField");
+    var placeholder = mainInput.attr("placeholder");
 
+    $('.contact input').keyup(function(e){
+      if (e.keyCode == 13) {
+          var input = mainInput.val();
+      
+      }
+    });
+
+    $("#mainFieldSubmit").click(function() {
+
+    });
 
     // What happens when the submit button is clicked
     $('#submit').click(function() {

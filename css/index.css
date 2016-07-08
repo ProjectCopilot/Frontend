@@ -63,49 +63,50 @@ em {
   margin-top: 25px;
 }
 
-form input {
+
+.contact input {
   font-size: 14pt;
   font-family: "Open Sans";
   padding: 8px 50px 8px 8px;
   border: 0;
   border-bottom: 2px solid rgba(33, 33, 33, 0.2);
   margin: 0 0px 15px 0px;
-  width: -webkit-calc(100% - 50px);
-  width: calc(100% - 50px);
+  width: -webkit-calc(100% - 120px);
+  width: calc(100% - 120px);
 }
 
-form #mainFieldSubmit {
-    margin-left: -50px;
+.contact .inputButton {
+    margin-left: 5px;
     font-size: 14pt;
     padding: 8px;
     font-family: "Open Sans";
     width: 50px;
-    background: #e74c3c;
+    background: #3498db;
     color: white;
     border:0;
     border-bottom: 2px solid transparent;
     -webkit-appearance: none;
 }
 
-form input:focus {
+.contact input:focus {
   outline: none;
-  border-bottom: 2px solid #e74c3c;
-  color: #e74c3c;
+  border-bottom: 2px solid #3498db;
+  color: #3498db;
 }
 
-form #submit {
+.contact #submit {
   font-family: "Open Sans";
   /*font-weight: 400;*/
   border: 1px solid rgba(33, 33, 33, 0.1);
   border-radius: 2px;
-  background-color: #e74c3c;
+  background-color: #3498db;
   color:white;
   padding: 10px 0px 10px 0px;
   width: 100%;
   font-size: 14pt;
 }
 
-form select {
+.contact select {
   appearance:none;
   -webkit-appearance:none;
   -moz-appearance:none;
@@ -122,17 +123,17 @@ form select {
 
 }
 
-form select option:first-child {
+.contact select option:first-child {
   color: #999;
 }
 
-form select:focus {
+.contact select:focus {
   outline: none;
-  border-bottom: 2px solid #e74c3c;
-  color: #e74c3c;
+  border-bottom: 2px solid #3498db;
+  color: #3498db;
 }
 
-form textarea {
+.contact textarea {
   resize: none;
   font-size: 14pt;
   font-family: "Open Sans";
@@ -142,19 +143,31 @@ form textarea {
   height: 200px;
 }
 
-form textarea:focus {
+.contact textarea:focus {
   outline:none;
   /*border-bottom: 2px solid #e74c3c;*/
-  color: #e74c3c;
+  color: #3498db;
   color: #999;
 }
 
-form button:hover {
+.contact button:hover {
   cursor:pointer;
 }
 
-form button:focus {
+.contact button:focus {
   outline:none;
+}
+
+button {
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+}
+
+button:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
 }
 
 #requestForm {
