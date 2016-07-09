@@ -1,6 +1,4 @@
 $(function() {
-    $("#submit").css("display", "none");
-
     var referralQuestionList = [
       {"key":"name", "value": "Their Name", "helper": "What's their name?"},
       {"key":"referer_name", "value": "Your Name", "helper": "What's your name?"},
@@ -82,6 +80,11 @@ $(function() {
         error: function(err) { // I have no clue why, but the response gets passed through the error method
           if (err.status == 200) {
             helper.text("Successfully submitted.");
+            setTimeout(function() {
+                $("body").fadeOut(function() {
+                  location.href = "/request";
+                });
+            }, 1000);
           } else {
             console.log(err);
             helper.html("There was an error submitting. Try again later.");

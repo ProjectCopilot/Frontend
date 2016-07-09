@@ -96,9 +96,9 @@ em {
 
 .contact #submit {
   font-family: "Open Sans";
-  /*font-weight: 400;*/
+  display:none;
   border: 1px solid rgba(33, 33, 33, 0.1);
-  border-radius: 2px;
+  border-radius: 4px;
   background-color: #3498db;
   color:white;
   padding: 10px 0px 10px 0px;
