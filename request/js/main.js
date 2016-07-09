@@ -1,4 +1,6 @@
 $(function() {
+    $("#submit").css("display", "none");
+
     var referralQuestionList = [
       {"key":"name", "value": "Their Name", "helper": "What's their name?"},
       {"key":"referer_name", "value": "Your Name", "helper": "What's your name?"},
@@ -44,9 +46,11 @@ $(function() {
           mainInput.val("").attr("placeholder", questionList[currentQuestion].value);
         }).fadeIn();
       } else {
-        console.log(inputJSON);
-        helper.text("Thank you. We will be in touch shortly.");
-        mainInput.val("");
+        helper.text("Hit \"Finish\" to complete.");
+        mainInput.val("").hide();
+        $("#mainFieldSubmit").hide();
+        $("#submit").fadeIn();
+
       }
     }
 
@@ -69,26 +73,18 @@ $(function() {
 
     // What happens when the submit button is clicked
     $('#submit').click(function() {
-      var d = {
-        "name": $(".contact input[name=name]").val(),
-        "age": $("form input[name=age]").val(),
-        "gender": $("form select[name=gender]").val(),
-        "contactMethod": $("form select[name=preferredComm]").val(),
-        "contact": $("form input[name=contact]").val(),
-        "situation": $("form textarea[name=situation]").val()
-      };
+      console.log(inputJSON);
 
       $.ajax({
         type: "POST",
         url: "http://localhost:3000/api/addUserRequest",
-        data: d,
+        data: inputJSON,
         error: function(err) { // I have no clue why, but the response gets passed through the error method
           if (err.status == 200) {
-            $("#message").html('<span style="color:green;">Successfully submitted.</span>');
-            $(".contact")[0].reset();
+            helper.text("Successfully submitted.");
           } else {
             console.log(err);
-            $("#message").html('<span style="color:red;">There was an error submitting.</span>');
+            helper.html("There was an error submitting. Try again later.");
           }
         },
         dataType: 'json',
