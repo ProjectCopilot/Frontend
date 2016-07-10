@@ -3,11 +3,11 @@ $(function() {
     // QUESTIONS (by default the form starts by asking whether the request is a referral or not)
     // Will most likely need to be moved to a JSON file at some point in the near future
     var referralQuestionList = [
-      {"key":"name", "value": "Their Name", "helper": "What's their name?"},
-      {"key":"referer_name", "value": "Your Name", "helper": "What's your name?"},
-      {"key":"age", "value": "Their Age", "helper": "How old are they?"},
-      {"key": "gender", "value": "Gender", "helper": "What gender do they identify as?"},
-      {"key": "school", "value": "School Name", "helper": "What school do they attend?"},
+      {"key":"name", "type": "text", "value": "Their Name", "helper": "What's their name?"},
+      {"key":"referer_name", "type": "text", "value": "Your Name", "helper": "What's your name?"},
+      {"key":"age", "type": "text", "value": "Their Age", "helper": "How old are they?"},
+      {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do they identify as?"},
+      {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do they attend?"},
       {"key": "contact", "value": "Their Contact", "helper": "What's the best way to reach them?"},
       {"key": "referer_contact", "value": "Your Contact", "helper": "What's the best way to reach you?"},
       {"key": "situation", "value": "Please Explain", "helper": "Please provide any additional information."}
@@ -93,7 +93,7 @@ $(function() {
             helper.text("Successfully submitted.");
             setTimeout(function() {
                 $("body").fadeOut(function() {
-                  location.href = "/request";
+                  location.href = "/";
                 });
             }, 1000);
           } else { // something bad happened
