@@ -8,6 +8,7 @@ dotenv.load();
 app.use('/', express.static(__dirname+'/static'));
 
 
-app.listen(process.env.PORT, function () {
-  console.log('Copilot Concierge service successfully running at localhost:'+process.env.PORT);
+app.listen(process.env.PORT, process.env.HOSTNAME, function () {
+  console.log('Copilot Concierge service successfully running at '
+      + process.env.HOSTNAME + ':' + process.env.PORT);
 });
