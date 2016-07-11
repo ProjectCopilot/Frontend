@@ -3,7 +3,7 @@ $(function() {
     // QUESTIONS (by default the form starts by asking whether the request is a referral or not)
     // Will most likely need to be moved to a JSON file at some point in the near future
     var questionList = [
-      {"key":"referral", "type": "option", "options": ["I'm referring someone else.", "This is personal."], "value": "Referral?", "helper": "Is this personal or are you referring someone else?",
+      {"key":"referral", "type": "option", "options": ["Yes", "No"], "value": "Referral?", "helper": "Is this personal or are you referring someone else?",
         "followUpQuestions": [
           {"key":"name", "type": "text", "value": "Their Name", "helper": "What's their name?"},
           {"key":"referer_name", "type": "text", "value": "Your Name", "helper": "What's your name?"},
@@ -21,7 +21,6 @@ $(function() {
       {"key": "school", "value": "School Name", "helper": "What school do you attend?"},
       {"key": "contact", "value": "Your Contact", "helper": "What's the best way to reach you?"},
       {"key": "situation", "value": "Please Explain", "helper": "What thoughts are you having?"}
-
     ];
 
 
@@ -31,7 +30,6 @@ $(function() {
         $("#mainField"),
         $("#mainOption")
     ];
-    var placeholder = mainInput.attr("placeholder");
     var inputJSON = {};
     var currentQuestion = 0;
     var referral = false;
@@ -41,15 +39,22 @@ $(function() {
 
     // Process current question and pull up next question
     function next() {
+      var ix = questionList[currentQuestion].type == "option" ? 1 : 0;
+
       if (questionList[currentQuestion].type == "option") {
         mainInput[0].css("display", "none");
         mainInput[1].css("display", "inline-block"); // show the element
+        helper.text(questionList[currentQuestion].helper);
+        $("#optionHelper").text(questionList[currentQuestion].value);
+        for (var i = 0; i < questionList[currentQuestion].options.length; i++) {
+          mainInput[ix].append('<option value="'+questionList[currentQuestion].options[i]+'">'+questionList[currentQuestion].options[i]+'</option>');
+        }
       } else {
         mainInput[0].css("display", "inline-block");
         mainInput[1].css("display", "none");
       }
 
-      var input = mainInput.val(); // grab main textfield input
+      var input = mainInput[ix].val(); // grab main textfield input
 
 
 
@@ -70,11 +75,11 @@ $(function() {
         }).fadeIn();
       } else {
 
-        // once all of the questions have been completed, show the SUBMIT button
-        helper.text("Hit \"Finish\" to complete.");
-        mainInput.val("").hide();
-        $("#mainFieldSubmit").hide();
-        $("#submit").fadeIn();
+        // // once all of the questions have been completed, show the SUBMIT button
+        // helper.text("Hit \"Finish\" to complete.");
+        // mainInput.val("").hide();
+        // $("#mainFieldSubmit").hide();
+        // $("#submit").fadeIn();
 
       }
     }
