@@ -2,39 +2,56 @@ $(function() {
 
     // QUESTIONS (by default the form starts by asking whether the request is a referral or not)
     // Will most likely need to be moved to a JSON file at some point in the near future
-    var referralQuestionList = [
-      {"key":"name", "type": "text", "value": "Their Name", "helper": "What's their name?"},
-      {"key":"referer_name", "type": "text", "value": "Your Name", "helper": "What's your name?"},
-      {"key":"age", "type": "text", "value": "Their Age", "helper": "How old are they?"},
-      {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do they identify as?"},
-      {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do they attend?"},
-      {"key": "contact", "value": "Their Contact", "helper": "What's the best way to reach them?"},
-      {"key": "referer_contact", "value": "Your Contact", "helper": "What's the best way to reach you?"},
-      {"key": "situation", "value": "Please Explain", "helper": "Please provide any additional information."}
-    ]
-    var individualQuestionList = [
+    var questionList = [
+      {"key":"referral", "type": "option", "options": ["I'm referring someone else.", "This is personal."], "value": "Referral?", "helper": "Is this personal or are you referring someone else?",
+        "followUpQuestions": [
+          {"key":"name", "type": "text", "value": "Their Name", "helper": "What's their name?"},
+          {"key":"referer_name", "type": "text", "value": "Your Name", "helper": "What's your name?"},
+          {"key":"age", "type": "text", "value": "Their Age", "helper": "How old are they?"},
+          {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do they identify as?"},
+          {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do they attend?"},
+          {"key": "contact", "value": "Their Contact", "helper": "What's the best way to reach them?"},
+          {"key": "referer_contact", "value": "Your Contact", "helper": "What's the best way to reach you?"},
+          {"key": "situation", "value": "Please Explain", "helper": "Please provide any additional information."}
+        ]
+      },
       {"key":"name", "value": "Your Name", "helper": "What's your name?"},
       {"key":"age", "value": "Your Age", "helper": "How old are you?"},
       {"key": "gender", "value": "Gender", "helper": "What gender do you identify as?"},
       {"key": "school", "value": "School Name", "helper": "What school do you attend?"},
       {"key": "contact", "value": "Your Contact", "helper": "What's the best way to reach you?"},
-      {"key": "situation", "value": "Please Explain", "helper": "What thoughts are you having?"} // definitely rephrase
+      {"key": "situation", "value": "Please Explain", "helper": "What thoughts are you having?"}
+
     ];
 
 
     // initialize standard form variables on page load
     var helper = $("#helper");
-    var mainInput = $("#mainField");
-    var questionList = individualQuestionList;
+    var mainInput = [
+        $("#mainField"),
+        $("#mainOption")
+    ];
     var placeholder = mainInput.attr("placeholder");
     var inputJSON = {};
-    var currentQuestion = -1;
+    var currentQuestion = 0;
     var referral = false;
 
+    // load initial question
+    next();
 
     // Process current question and pull up next question
     function next() {
+      if (questionList[currentQuestion].type == "option") {
+        mainInput[0].css("display", "none");
+        mainInput[1].css("display", "inline-block"); // show the element
+      } else {
+        mainInput[0].css("display", "inline-block");
+        mainInput[1].css("display", "none");
+      }
+
       var input = mainInput.val(); // grab main textfield input
+
+
 
       // decide whether the request is a referral or not
       if (currentQuestion == -1 && (input.toLowerCase() == "yes" || input.toLowerCase() == "y")) {

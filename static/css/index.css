@@ -68,7 +68,7 @@ em {
 }
 
 .contact #mainOption {
-  
+    display:none;
 }
 
 .contact input, select {
