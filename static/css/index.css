@@ -68,7 +68,7 @@ em {
 }
 
 .contact #mainOption {
-  display:none;
+  
 }
 
 .contact input, select {
@@ -187,4 +187,3 @@ button:hover {
 #requestForm {
   text-align:center;
 }
-
