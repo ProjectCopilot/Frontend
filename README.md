@@ -1,8 +1,6 @@
 Concierge
 =========
 
-TODO(gmittal): write setup instructions
-
 ### Setup
 Populate ```.env``` file in project root.
 ```
@@ -19,4 +17,6 @@ Run the app.
 ```
 $ node app.js
 ```
+
+(Or you can just run `deploy.sh` :wink:)
 
