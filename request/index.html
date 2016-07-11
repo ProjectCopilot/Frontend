@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+        <link href="//cdn.rawgit.com/rohitkrai03/pills/gh-pages/dist/pills.min.css" rel ="stylesheet" type="text/css">
+        <link href="../css/index.css" rel="stylesheet" type="text/css">
+        <title>Copilot Request</title>
+    </head>
+    <body>
+        <div class="row">
+          <div class="two columns"></div>
+          <div class="eight columns" id="requestForm">
+            <h1>Get Help</h1>
+            <h3>We're here to help. <span id="message"></span></h3>
+            <form class="contact">
+              <div class="row">
+                <div class="half columns">
+                  <input type="text" name="name" placeholder="Your Name"/>
+                  <input type="text" name="age" placeholder="Age"/>
+                  <select name="gender">
+                    <option value="" disabled selected>Gender</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="non-binary">Non-binary</option>
+                  </select>
+                  <select name="preferredComm">
+                    <option value="" disabled selected>Preferred Contact</option>
+                    <option value="email">Email</option>
+                    <option value="sms">SMS</option>
+                  </select>
+                  <input type="text" name="contact" placeholder="Contact" /><br />
+                </div>
+                <div class="half columns">
+                  <textarea name="situation" placeholder="Describe your situation..."></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="whole columns">
+                  <button id="submit">Request</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="two columns"></div>
+        </div>
+
+
+        <footer>
+            <p>If you or a friend are in immediate danger, call <em>911</em> or local emergency services.</p>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script>
+          // prevent form from redirecting/refreshing on submit
+          $(function() {
+              $('#submit').click(function() {
+                var d = {
+                  "name": $(".contact input[name=name]").val(),
+                  "age": isNaN(parseInt($("form input[name=age]").val(), 10)) ? "error" : parseInt($("form input[name=age]").val(), 10),
+                  "gender": $("form select[name=gender]").val(),
+                  "contactMethod": $("form select[name=preferredComm]").val(),
+                  "contact": $("form input[name=contact]").val(),
+                  "situation": $("form textarea[name=situation]").val()
+                };
+
+                console.log(d);
+
+                $.ajax({
+              	  type: "POST",
+              	  url: "http://localhost:3000/api/addUserRequest",
+              	  data: d,
+              	  error: function(err) { // I have no clue why, but the response gets passed through the error method
+                    if (err.status == 200) {
+                      $("#message").html('<span style="color:green;">Successfully submitted.</span>');
+                      $(".contact")[0].reset();
+                    } else {
+                      console.log(err);
+                      $("#message").html('<span style="color:red;">There was an error submitting.</span>');
+                    }
+              	  },
+              	  dataType: 'json',
+              	});
+
+                return false;
+              });
+            });
+        </script>
+    </body>
+</html>
