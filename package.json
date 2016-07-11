@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/ProjectCopilot/Frontend/issues"
   },
-  "homepage": "https://github.com/ProjectCopilot/Frontend#readme"
+  "homepage": "https://github.com/ProjectCopilot/Frontend#readme",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0"
+  }
 }
