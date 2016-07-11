@@ -1,4 +1,4 @@
-Copilot Front-End
-=================
+Concierge
+=========
 
-TODO(ankitr): write setup instructions
+TODO(gmittal): write setup instructions
