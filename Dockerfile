@@ -10,6 +10,6 @@ RUN npm install -g n
 RUN sudo n stable
 
 ADD /user-client /user-client
-RN cd /user-client && npm install
+RUN cd /user-client && npm install
 
 CMD ["/usr/bin/node", "app.js"] 
