@@ -135,6 +135,14 @@ form textarea:focus {
   color: #999;
 }
 
+button:hover {
+  cursor:pointer;
+}
+
+button:focus {
+  outline:none;
+}
+
 #requestForm {
   text-align:center;
 }
