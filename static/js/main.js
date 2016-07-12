@@ -13,12 +13,12 @@
           {"key": "situation", "value": "Please Explain", "helper": "Please provide any additional information.", "followUpValue": "NONE"}
         ]
       },
-      {"key":"name", "value": "Your Name", "helper": "What's your name?"},
-      {"key":"age", "value": "Your Age", "helper": "How old are you?"},
-      {"key": "gender", "value": "Gender", "helper": "What gender do you identify as?"},
-      {"key": "school", "value": "School Name", "helper": "What school do you attend?"},
-      {"key": "contact", "value": "Your Contact", "helper": "What's the best way to reach you?"},
-      {"key": "situation", "value": "Please Explain", "helper": "What thoughts are you having?"}
+      {"key":"name", "type": "text", "value": "Your Name", "helper": "What's your name?", "followUpValue": "NONE"},
+      {"key":"age", "type": "text", "value": "Your Age", "helper": "How old are you?", "followUpValue": "NONE"},
+      {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do you identify as?", "followUpValue": "NONE"},
+      {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do you attend?", "followUpValue": "NONE"},
+      {"key": "contact", "value": "Your Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
+      {"key": "situation", "value": "Please Explain", "helper": "What thoughts are you having?", "followUpValue": "NONE"}
     ];
 
 
