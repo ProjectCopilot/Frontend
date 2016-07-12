@@ -43,10 +43,12 @@
       helper.fadeOut(function() {
         helper.text(questionQueue[currentQuestion].helper);
         // Is the question type an option or a textfield?
+        ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
+
         if (ix == 1) {
           mainInput[0].css("display", "none");
           mainInput[1].css("display", "inline-block"); // show the element
-
+          $("#mainOption").html("<option value=\"\" id=\"optionHelper\" disabled selected>Option Placeholder</option>");
           $("#optionHelper").text(questionQueue[currentQuestion].value);
           for (var i = 0; i < questionQueue[currentQuestion].options.length; i++) {
             mainInput[ix].append('<option value="'+questionQueue[currentQuestion].options[i]+'">'+questionQueue[currentQuestion].options[i]+'</option>');
@@ -77,8 +79,6 @@
           }
 
           currentQuestion = 0;
-
-          ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
 
         } else {
           if (mainInput[1].val() !== null || mainInput[0].val() !== "") currentQuestion++;
@@ -113,7 +113,6 @@
     });
 
     $("#mainFieldSubmit").click(function() {
-        console.log(mainInput[ix].val());
         if (mainInput[ix].val().length !== 0) {
           next();
         }
