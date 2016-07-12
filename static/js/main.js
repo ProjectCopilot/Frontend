@@ -29,34 +29,37 @@
         $("#mainOption")
     ];
     var inputJSON = {};
-    var questionQueue = questionList;
+    var questionQueue = [];
+    for (var j = 0; j < questionList.length; j++) {
+      questionQueue.push(questionList[j]);
+    }
     var currentQuestion = 0;
+    var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
     var referral = false;
-
-    // load initial question
-    next();
 
     // Process current question and pull up next question
     function next() {
-      console.log(currentQuestion);
-      var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
+
       helper.fadeOut(function() {
         helper.text(questionQueue[currentQuestion].helper);
-      }).fadeIn()
+        // Is the question type an option or a textfield?
+        if (ix == 1) {
+          mainInput[0].css("display", "none");
+          mainInput[1].css("display", "inline-block"); // show the element
 
-      if (questionQueue[currentQuestion].type == "option") {
-        mainInput[0].css("display", "none");
-        mainInput[1].css("display", "inline-block"); // show the element
-        helper.text(questionQueue[currentQuestion].helper);
-        $("#optionHelper").text(questionQueue[currentQuestion].value);
-        for (var i = 0; i < questionQueue[currentQuestion].options.length; i++) {
-          mainInput[ix].append('<option value="'+questionQueue[currentQuestion].options[i]+'">'+questionQueue[currentQuestion].options[i]+'</option>');
+          $("#optionHelper").text(questionQueue[currentQuestion].value);
+          for (var i = 0; i < questionQueue[currentQuestion].options.length; i++) {
+            mainInput[ix].append('<option value="'+questionQueue[currentQuestion].options[i]+'">'+questionQueue[currentQuestion].options[i]+'</option>');
+          }
+        } else {
+          mainInput[0].css("display", "inline-block");
+          mainInput[1].css("display", "none");
+          mainInput[ix].val("").attr("placeholder", questionQueue[currentQuestion].value);
+
         }
-      } else {
-        mainInput[0].css("display", "inline-block");
-        mainInput[1].css("display", "none");
 
-      }
+      }).fadeIn();
+
 
       var input = mainInput[ix].val();
 
@@ -64,11 +67,19 @@
       inputJSON[questionQueue[currentQuestion].key] = input;
 
       // iteratively move through all of the questions
-      if (currentQuestion < questionQueue.length-1) {
+      // if (currentQuestion < questionQueue.length-1) {
         if (mainInput[ix].val() == questionQueue[currentQuestion].followUpValue && questionQueue[currentQuestion].followUpValue !== "NONE") {
-          // alert("YO");
-          questionQueue = questionQueue[currentQuestion].followUpQuestions;
+
+          var followUpArray = questionQueue[currentQuestion].followUpQuestions;
+          questionQueue.length = 0; // wipe array
+          for (var k = 0; k < followUpArray.length; k++) {
+              questionQueue.push(followUpArray[k]);
+          }
+
           currentQuestion = 0;
+
+          ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
+
         } else {
           if (mainInput[1].val() !== null || mainInput[0].val() !== "") currentQuestion++;
         }
@@ -77,7 +88,7 @@
         //   helper.text(questionList[currentQuestion].helper);
         //   mainInput.val("").attr("placeholder", questionList[currentQuestion].value);
         // }).fadeIn();
-      } else {
+      // } else {
 
         // // once all of the questions have been completed, show the SUBMIT button
         // helper.text("Hit \"Finish\" to complete.");
@@ -85,21 +96,23 @@
         // $("#mainFieldSubmit").hide();
         // $("#submit").fadeIn();
 
-      }
+      // }
     }
 
+
+    // load initial question
+    next();
 
 
     // Standard handlers for when the user hits return or "OK"
     $('.contact input').keyup(function(e){
-      var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
+      // var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
       if (e.keyCode == 13 && mainInput[ix].val().length !== 0) {
         next();
       }
     });
 
     $("#mainFieldSubmit").click(function() {
-        var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
         console.log(mainInput[ix].val());
         if (mainInput[ix].val().length !== 0) {
           next();
