@@ -59,18 +59,18 @@
       }
 
       var input = mainInput[ix].val();
-      // alert(input);
 
 
-      inputJSON[currentQuestion !== -1 ? questionQueue[currentQuestion].key : "referral"] = currentQuestion !== -1 ? input : referral;
+      inputJSON[questionQueue[currentQuestion].key] = input;
 
       // iteratively move through all of the questions
-      if (currentQuestion < questionList.length-1) {
+      if (currentQuestion < questionQueue.length-1) {
         if (mainInput[ix].val() == questionQueue[currentQuestion].followUpValue && questionQueue[currentQuestion].followUpValue !== "NONE") {
+          // alert("YO");
           questionQueue = questionQueue[currentQuestion].followUpQuestions;
           currentQuestion = 0;
         } else {
-          currentQuestion++;
+          if (mainInput[1].val() !== null || mainInput[0].val() !== "") currentQuestion++;
         }
 
         // helper.fadeOut(function() {
