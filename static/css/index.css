@@ -59,6 +59,10 @@ em {
     color: #f33;
 }
 
+#helper {
+  display:none;
+}
+
 .contact {
   margin-top: 25px;
 }

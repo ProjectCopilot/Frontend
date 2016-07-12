@@ -1,18 +1,16 @@
-$(function() {
-
     // QUESTIONS (by default the form starts by asking whether the request is a referral or not)
     // Will most likely need to be moved to a JSON file at some point in the near future
     var questionList = [
       {"key":"referral", "type": "option", "options": ["Yes", "No"], "value": "Referral?", "helper": "Is this personal or are you referring someone else?",
-        "followUpQuestions": [
-          {"key":"name", "type": "text", "value": "Their Name", "helper": "What's their name?"},
-          {"key":"referer_name", "type": "text", "value": "Your Name", "helper": "What's your name?"},
-          {"key":"age", "type": "text", "value": "Their Age", "helper": "How old are they?"},
-          {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do they identify as?"},
-          {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do they attend?"},
-          {"key": "contact", "value": "Their Contact", "helper": "What's the best way to reach them?"},
-          {"key": "referer_contact", "value": "Your Contact", "helper": "What's the best way to reach you?"},
-          {"key": "situation", "value": "Please Explain", "helper": "Please provide any additional information."}
+        "followUpValue": "Yes", "followUpQuestions": [
+          {"key":"name", "type": "text", "value": "Their Name", "helper": "What's their name?", "followUpValue": "NONE"},
+          {"key":"referer_name", "type": "text", "value": "Your Name", "helper": "What's your name?", "followUpValue": "NONE"},
+          {"key":"age", "type": "text", "value": "Their Age", "helper": "How old are they?", "followUpValue": "NONE"},
+          {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do they identify as?", "followUpValue": "NONE"},
+          {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do they attend?", "followUpValue": "NONE"},
+          {"key": "contact", "value": "Their Contact", "helper": "What's the best way to reach them?", "followUpValue": "NONE"},
+          {"key": "referer_contact", "value": "Your Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
+          {"key": "situation", "value": "Please Explain", "helper": "Please provide any additional information.", "followUpValue": "NONE"}
         ]
       },
       {"key":"name", "value": "Your Name", "helper": "What's your name?"},
@@ -31,6 +29,7 @@ $(function() {
         $("#mainOption")
     ];
     var inputJSON = {};
+    var questionQueue = questionList;
     var currentQuestion = 0;
     var referral = false;
 
@@ -39,40 +38,45 @@ $(function() {
 
     // Process current question and pull up next question
     function next() {
-      var ix = questionList[currentQuestion].type == "option" ? 1 : 0;
+      console.log(currentQuestion);
+      var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
+      helper.fadeOut(function() {
+        helper.text(questionQueue[currentQuestion].helper);
+      }).fadeIn()
 
-      if (questionList[currentQuestion].type == "option") {
+      if (questionQueue[currentQuestion].type == "option") {
         mainInput[0].css("display", "none");
         mainInput[1].css("display", "inline-block"); // show the element
-        helper.text(questionList[currentQuestion].helper);
-        $("#optionHelper").text(questionList[currentQuestion].value);
-        for (var i = 0; i < questionList[currentQuestion].options.length; i++) {
-          mainInput[ix].append('<option value="'+questionList[currentQuestion].options[i]+'">'+questionList[currentQuestion].options[i]+'</option>');
+        helper.text(questionQueue[currentQuestion].helper);
+        $("#optionHelper").text(questionQueue[currentQuestion].value);
+        for (var i = 0; i < questionQueue[currentQuestion].options.length; i++) {
+          mainInput[ix].append('<option value="'+questionQueue[currentQuestion].options[i]+'">'+questionQueue[currentQuestion].options[i]+'</option>');
         }
       } else {
         mainInput[0].css("display", "inline-block");
         mainInput[1].css("display", "none");
+
       }
 
-      var input = mainInput[ix].val(); // grab main textfield input
+      var input = mainInput[ix].val();
+      // alert(input);
 
 
-
-      // decide whether the request is a referral or not
-      if (currentQuestion == -1 && (input.toLowerCase() == "yes" || input.toLowerCase() == "y")) {
-        referral = true;
-        questionList = referralQuestionList;
-      }
-
-      inputJSON[currentQuestion !== -1 ? questionList[currentQuestion].key : "referral"] = currentQuestion !== -1 ? input : referral;
+      inputJSON[currentQuestion !== -1 ? questionQueue[currentQuestion].key : "referral"] = currentQuestion !== -1 ? input : referral;
 
       // iteratively move through all of the questions
       if (currentQuestion < questionList.length-1) {
-        currentQuestion++;
-        helper.fadeOut(function() {
-          helper.text(questionList[currentQuestion].helper);
-          mainInput.val("").attr("placeholder", questionList[currentQuestion].value);
-        }).fadeIn();
+        if (mainInput[ix].val() == questionQueue[currentQuestion].followUpValue && questionQueue[currentQuestion].followUpValue !== "NONE") {
+          questionQueue = questionQueue[currentQuestion].followUpQuestions;
+          currentQuestion = 0;
+        } else {
+          currentQuestion++;
+        }
+
+        // helper.fadeOut(function() {
+        //   helper.text(questionList[currentQuestion].helper);
+        //   mainInput.val("").attr("placeholder", questionList[currentQuestion].value);
+        // }).fadeIn();
       } else {
 
         // // once all of the questions have been completed, show the SUBMIT button
@@ -88,15 +92,18 @@ $(function() {
 
     // Standard handlers for when the user hits return or "OK"
     $('.contact input').keyup(function(e){
-      if (e.keyCode == 13 && mainInput.val().length !== 0) {
+      var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
+      if (e.keyCode == 13 && mainInput[ix].val().length !== 0) {
         next();
       }
     });
 
     $("#mainFieldSubmit").click(function() {
-      if (mainInput.val().length !== 0) {
-        next();
-      }
+        var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
+        console.log(mainInput[ix].val());
+        if (mainInput[ix].val().length !== 0) {
+          next();
+        }
     });
 
 
@@ -128,4 +135,3 @@ $(function() {
 
       return false;
     });
-  });
