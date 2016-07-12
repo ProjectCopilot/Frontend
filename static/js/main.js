@@ -1,3 +1,20 @@
+  // Project Copilot Concierge Client
+  // Copyright 2016 Project Copilot
+
+  // Contact information validation helper methods
+  var contactValidate = {
+    email: function(mail) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+      {
+        return true;
+      }
+        return false;
+    },
+    phone: function(phone) {
+      return phoneUtils.isValidNumber(phone, "US");
+    }
+  }
+
     // QUESTIONS (by default the form starts by asking whether the request is a referral or not)
     // Will most likely need to be moved to a JSON file at some point in the near future
     var questionList = [
@@ -8,7 +25,9 @@
           {"key":"age", "type": "text", "value": "Their Age", "helper": "How old are they?", "followUpValue": "NONE"},
           {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do they identify as?", "followUpValue": "NONE"},
           {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do they attend?", "followUpValue": "NONE"},
+          {"key": "contactMethod", "type": "option", "options": ["SMS", "Email"], "value": "Preferred Contact", "helper": "What's the best way to reach them?", "followUpValue": "NONE"},
           {"key": "contact", "value": "Their Contact", "helper": "What's the best way to reach them?", "followUpValue": "NONE"},
+          {"key": "referer_contactMethod", "type": "option", "options": ["SMS", "Email"], "value": "Preferred Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
           {"key": "referer_contact", "value": "Your Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
           {"key": "situation", "value": "Please Explain", "helper": "Please provide any additional information.", "followUpValue": "NONE"}
         ]
@@ -17,7 +36,8 @@
       {"key":"age", "type": "text", "value": "Your Age", "helper": "How old are you?", "followUpValue": "NONE"},
       {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do you identify as?", "followUpValue": "NONE"},
       {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do you attend?", "followUpValue": "NONE"},
-      {"key": "contact", "value": "Your Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
+      {"key": "contactMethod", "type": "option", "options": ["SMS", "Email"], "value": "Preferred Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
+      {"key": "contact", "type": "text", "value": "Your Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
       {"key": "situation", "value": "Please Explain", "helper": "What thoughts are you having?", "followUpValue": "NONE"}
     ];
 
