@@ -26,9 +26,9 @@
           {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do they identify as?", "followUpValue": "NONE"},
           {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do they attend?", "followUpValue": "NONE"},
           {"key": "contactMethod", "type": "option", "options": ["SMS", "Email"], "value": "Preferred Contact", "helper": "What's the best way to reach them?", "followUpValue": "NONE"},
-          {"key": "contact", "value": "Their Contact", "helper": "What's the best way to reach them?", "followUpValue": "NONE"},
+          {"key": "contact", "value": "Their Contact", "helper": "Please provide their primary contact information.", "followUpValue": "NONE"},
           {"key": "referer_contactMethod", "type": "option", "options": ["SMS", "Email"], "value": "Preferred Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
-          {"key": "referer_contact", "value": "Your Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
+          {"key": "referer_contact", "value": "Your Contact", "helper": "Please provide your primary contact information.", "followUpValue": "NONE"},
           {"key": "situation", "value": "Please Explain", "helper": "Please provide any additional information.", "followUpValue": "NONE"}
         ]
       },
@@ -37,7 +37,7 @@
       {"key": "gender", "type": "option", "options": ["Female", "Male", "Non-binary"], "value": "Gender", "helper": "What gender do you identify as?", "followUpValue": "NONE"},
       {"key": "school", "type": "option", "options": ["Henry M. Gunn High School", "Palo Alto High School"], "value": "School Name", "helper": "What school do you attend?", "followUpValue": "NONE"},
       {"key": "contactMethod", "type": "option", "options": ["SMS", "Email"], "value": "Preferred Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
-      {"key": "contact", "type": "text", "value": "Your Contact", "helper": "What's the best way to reach you?", "followUpValue": "NONE"},
+      {"key": "contact", "type": "text", "value": "Your Contact", "helper": "Please provide your primary contact information.", "followUpValue": "NONE"},
       {"key": "situation", "value": "Please Explain", "helper": "What thoughts are you having?", "followUpValue": "NONE"}
     ];
 
@@ -54,6 +54,7 @@
       questionQueue.push(questionList[j]);
     }
     var currentQuestion = 0;
+    var queueLength = questionQueue.length;
     var ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
     var referral = false;
 
@@ -61,23 +62,32 @@
     function next() {
 
       helper.fadeOut(function() {
-        helper.text(questionQueue[currentQuestion].helper);
-        // Is the question type an option or a textfield?
-        ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
+        if (currentQuestion < queueLength-1) {
+          helper.text(questionQueue[currentQuestion].helper);
+          // Is the question type an option or a textfield?
+          ix = questionQueue[currentQuestion].type == "option" ? 1 : 0;
 
-        if (ix == 1) {
-          mainInput[0].css("display", "none");
-          mainInput[1].css("display", "inline-block"); // show the element
-          $("#mainOption").html("<option value=\"\" id=\"optionHelper\" disabled selected>Option Placeholder</option>");
-          $("#optionHelper").text(questionQueue[currentQuestion].value);
-          for (var i = 0; i < questionQueue[currentQuestion].options.length; i++) {
-            mainInput[ix].append('<option value="'+questionQueue[currentQuestion].options[i]+'">'+questionQueue[currentQuestion].options[i]+'</option>');
+          queueLength = questionQueue.length;
+
+          if (ix == 1) {
+            mainInput[0].css("display", "none");
+            mainInput[1].css("display", "inline-block"); // show the element
+            $("#mainOption").html("<option value=\"\" id=\"optionHelper\" disabled selected>Option Placeholder</option>");
+            $("#optionHelper").text(questionQueue[currentQuestion].value);
+            for (var i = 0; i < questionQueue[currentQuestion].options.length; i++) {
+              mainInput[ix].append('<option value="'+questionQueue[currentQuestion].options[i]+'">'+questionQueue[currentQuestion].options[i]+'</option>');
+            }
+          } else {
+            mainInput[0].css("display", "inline-block");
+            mainInput[1].css("display", "none");
+            mainInput[ix].val("").attr("placeholder", questionQueue[currentQuestion].value);
+
           }
         } else {
-          mainInput[0].css("display", "inline-block");
-          mainInput[1].css("display", "none");
-          mainInput[ix].val("").attr("placeholder", questionQueue[currentQuestion].value);
-
+          helper.text("Hit \"Finish\" to complete.");
+          mainInput[ix].val("").hide();
+          $("#mainFieldSubmit").hide();
+          $("#submit").fadeIn();
         }
 
       }).fadeIn();
@@ -89,7 +99,7 @@
       inputJSON[questionQueue[currentQuestion].key] = input;
 
       // iteratively move through all of the questions
-      // if (currentQuestion < questionQueue.length-1) {
+
         if (mainInput[ix].val() == questionQueue[currentQuestion].followUpValue && questionQueue[currentQuestion].followUpValue !== "NONE") {
 
           var followUpArray = questionQueue[currentQuestion].followUpQuestions;
@@ -104,19 +114,7 @@
           if (mainInput[1].val() !== null || mainInput[0].val() !== "") currentQuestion++;
         }
 
-        // helper.fadeOut(function() {
-        //   helper.text(questionList[currentQuestion].helper);
-        //   mainInput.val("").attr("placeholder", questionList[currentQuestion].value);
-        // }).fadeIn();
-      // } else {
 
-        // // once all of the questions have been completed, show the SUBMIT button
-        // helper.text("Hit \"Finish\" to complete.");
-        // mainInput.val("").hide();
-        // $("#mainFieldSubmit").hide();
-        // $("#submit").fadeIn();
-
-      // }
     }
 
 
