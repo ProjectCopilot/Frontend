@@ -61,6 +61,7 @@ em {
 
 #helper {
   display:none;
+  line-height: 140%;
 }
 
 .contact {
@@ -68,11 +69,15 @@ em {
 }
 
 .contact #mainField {
-
+  display:none;
 }
 
 .contact #mainOption {
-    display:none;
+  display:none;
+}
+
+.contact #mainTextArea {
+  display:none;
 }
 
 .contact input, select {
@@ -122,6 +127,7 @@ em {
   padding: 10px 0px 10px 0px;
   width: 100%;
   font-size: 14pt;
+  vertical-align: top;
 }
 
 .contact select option:first-child {
@@ -138,12 +144,14 @@ em {
   resize: none;
   font-size: 14pt;
   font-family: "Open Sans";
-  padding: 8px 50px 8px 8px;
-  margin: 0 0px 15px 0px;
-  width: -webkit-calc(100% - 120px);
-  width: calc(100% - 120px);
-  border: 0;
-  border-bottom: 2px solid rgba(33, 33, 33, 0.2);
+  padding: 8px 8px 8px 8px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  width: 90%;
+  border-radius: 3px;
+  /*width: calc(100% - 120px);*/
+  border: 1px solid rgba(33, 33, 33, 0.1);
+  /*border-bottom: 2px solid rgba(33, 33, 33, 0.2);*/
   height: 200px;
 }
 
