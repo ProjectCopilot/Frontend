@@ -102,7 +102,6 @@
             mainInput[2].css("display", "block");
             mainInput[0].css("display", "none");
             mainInput[1].css("display", "none");
-            $("#submit").css("width", "100%");
             mainInput[ix].val("").attr("placeholder", questionQueue[currentQuestion].value);
           }
 
