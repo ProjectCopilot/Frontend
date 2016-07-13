@@ -3,6 +3,6 @@ set -eo pipefail
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-npm install $BASEDIR
+npm install --prefix $BASEDIR $BASEDIR
 node $BASEDIR/app.js
 
