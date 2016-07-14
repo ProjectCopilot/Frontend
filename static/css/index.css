@@ -135,12 +135,12 @@ em {
 }
 
 .contact #backButton {
-  /*height: 100px;*/
   opacity: 0.5!important;
   -webkit-transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
   -ms-transition: all 0.1s linear;
+  display:none;
 }
 
 .contact #backButton:hover {
@@ -202,4 +202,10 @@ button:hover {
 
 #requestForm {
   text-align:center;
+}
+
+@media (max-width: 512px) {
+  #backLabel {
+    display:none;
+  }
 }

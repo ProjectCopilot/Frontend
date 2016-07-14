@@ -16,11 +16,14 @@
           var questionQueue = questionList.slice();
           var backStack = [];
           var currentQuestion = 0;
+          var q_count = -1;
           var queueLength = questionQueue.length;
           var ix = getInputIndex(questionQueue[currentQuestion].type);
           var q_prev = '';
           var current = {};
           var prev = {};
+
+
 
           // return ix given type
           function getInputIndex(type) {
@@ -39,6 +42,10 @@
 
             helper.fadeOut(function() {
               if (currentQuestion < queueLength) {
+
+                if (q_count > -1) $("#backButton").css("display", "inline-block");
+                q_count++;
+
                 helper.text(questionQueue[currentQuestion].helper);
 
                   // q_prev = currentQuestion !== 0 || _.isEqual(questionList, questionQueue) ? q_prev : "NONE";
@@ -123,47 +130,54 @@
 
           // How to go back in time (without having to go 88 mph)
           function back() {
-            // the LAST object on the backstack is the current question
-            current = backStack[backStack.length-1]; // grab last object
-            backStack.pop(); // remove it
-            prev = backStack[backStack.length-1]; // get the previous object
-            ix = getInputIndex(prev.type);
-            currentQuestion = prev.currentIndex;
-            questionQueue = prev.queue.slice();
-
-            helper.text(prev.helper);
-
-            if (ix == 1) {
-              mainInput[0].css("display", "none");
-              mainInput[1].css("display", "inline-block");
-              mainInput[2].css("display", "none");
-              $("#mainOption").html("<option value=\"\" id=\"optionHelper\" disabled selected>Option Placeholder</option>");
-              $("#optionHelper").text(prev.value);
-              for (var i = 0; i < prev.options.length; i++) {
-                mainInput[ix].append('<option value="'+prev.options[i]+'">'+prev.options[i]+'</option>');
+            if (q_count > 0) {
+              q_count--;
+              console.log(q_count);
+              if (q_count == 0) {
+                $("#backButton").css("display", "none");
               }
-              $("#mainOption").val(current.previousValue);
-              $("#mainFieldSubmit").show();
-              $("#submit").hide();
 
-            } else if (ix == 0) {
-              mainInput[0].css("display", "inline-block");
-              mainInput[1].css("display", "none");
-              mainInput[2].css("display", "none");
-              mainInput[ix].val(current.previousValue).attr("placeholder", prev.value);
-              $("#mainFieldSubmit").show();
-              $("#submit").hide();
+              // the LAST object on the backstack is the current question
+              current = backStack[backStack.length-1]; // grab last object
+              backStack.pop(); // remove it
+              prev = backStack[backStack.length-1]; // get the previous object
+              ix = getInputIndex(prev.type);
+              currentQuestion = prev.currentIndex;
+              questionQueue = prev.queue.slice();
 
-            } else if (ix == 2) {
-              mainInput[2].css("display", "block");
-              mainInput[0].css("display", "none");
-              mainInput[1].css("display", "none");
-              mainInput[ix].val(current.previousValue).attr("placeholder", prev.value);
-              $("#mainFieldSubmit").show();
-              $("#submit").hide();
+              helper.text(prev.helper);
+
+              if (ix == 1) {
+                mainInput[0].css("display", "none");
+                mainInput[1].css("display", "inline-block");
+                mainInput[2].css("display", "none");
+                $("#mainOption").html("<option value=\"\" id=\"optionHelper\" disabled selected>Option Placeholder</option>");
+                $("#optionHelper").text(prev.value);
+                for (var i = 0; i < prev.options.length; i++) {
+                  mainInput[ix].append('<option value="'+prev.options[i]+'">'+prev.options[i]+'</option>');
+                }
+                $("#mainOption").val(current.previousValue);
+                $("#mainFieldSubmit").show();
+                $("#submit").hide();
+
+              } else if (ix == 0) {
+                mainInput[0].css("display", "inline-block");
+                mainInput[1].css("display", "none");
+                mainInput[2].css("display", "none");
+                mainInput[ix].val(current.previousValue).attr("placeholder", prev.value);
+                $("#mainFieldSubmit").show();
+                $("#submit").hide();
+
+              } else if (ix == 2) {
+                mainInput[2].css("display", "block");
+                mainInput[0].css("display", "none");
+                mainInput[1].css("display", "none");
+                mainInput[ix].val(current.previousValue).attr("placeholder", prev.value);
+                $("#mainFieldSubmit").show();
+                $("#submit").hide();
+              }
+
             }
-
-
 
           }
 
