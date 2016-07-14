@@ -2,147 +2,8 @@
   // Project Copilot Concierge Client
   // Copyright 2016 Project Copilot
 
-  var questionList = [
-    {
-      "key":"referral",
-      "type": "option",
-      "options": ["Yes", "No"],
-      "value": "Referral?",
-      "helper": "Is this personal or are you referring someone else?",
-      "followUpValue": "Yes", "followUpQuestions": [
-        {
-          "key":"name",
-          "type": "text",
-          "value": "Their Name",
-          "helper": "What's their name?",
-          "followUpValue": "NONE"
-        },
-        {
-          "key":"referer_name",
-          "type": "text",
-          "value": "Your Name",
-          "helper": "What's your name?",
-          "followUpValue": "NONE"
-        },
-        {
-          "key":"age",
-          "type": "text",
-          "value": "Their Age",
-          "helper": "How old are they?",
-          "followUpValue": "NONE"
-        },
-        {
-          "key": "gender",
-          "type": "option",
-          "options": ["Female", "Male", "Non-binary"],
-          "value": "Gender",
-          "helper": "What gender do they identify as?",
-          "followUpValue": "NONE"
-        },
-        {
-          "key": "school",
-          "type": "option",
-          "options": ["Henry M. Gunn High School", "Palo Alto High School"],
-          "value": "School Name",
-          "helper": "What school do they attend?",
-          "followUpValue": "NONE"
-        },
-        {
-          "key": "contactMethod",
-          "type": "option",
-          "options": ["SMS", "Email"],
-          "value": "Preferred Contact",
-          "helper": "What's the best way to reach them?",
-          "followUpValue": "NONE"
-        },
-        {
-          "key": "contact",
-          "type": "text",
-          "value": "Their Contact",
-          "helper": "Please provide their primary contact information.",
-          "followUpValue": "NONE"
-        },
-        {
-          "key": "referer_contactMethod",
-          "type": "option",
-          "options": ["SMS", "Email"],
-          "value": "Preferred Contact",
-          "helper": "What's the best way to reach you?",
-          "followUpValue": "NONE"
-        },
-        {
-          "key": "referer_contact",
-          "type": "text",
-          "value": "Your Contact",
-          "helper": "Please provide your primary contact information.",
-          "followUpValue": "NONE"
-        },
-        {
-          "key": "situation",
-          "type": "textarea",
-          "value": "Please Explain",
-          "helper": "Please provide any additional information.",
-          "followUpValue": "NONE"
-        }
-      ]
-    },
-    {
-      "key":"name",
-      "type": "text",
-      "value": "Your Name",
-      "helper": "What's your name?",
-      "followUpValue": "NONE"
-    },
-    {
-      "key":"age",
-      "type": "text",
-      "value": "Your Age",
-      "helper": "How old are you?",
-      "followUpValue": "NONE"
-    },
-    {
-      "key": "gender",
-      "type": "option",
-      "options": ["Female", "Male", "Non-binary"],
-      "value": "Gender",
-      "helper": "What gender do you identify as?",
-      "followUpValue": "NONE"
-    },
-    {
-      "key": "school",
-      "type": "option",
-      "options": ["Henry M. Gunn High School", "Palo Alto High School"],
-      "value": "School Name",
-      "helper": "What school do you attend?",
-      "followUpValue": "NONE"
-    },
-    {
-      "key": "contactMethod",
-      "type": "option",
-      "options": ["SMS", "Email"],
-      "value": "Preferred Contact",
-      "helper": "What's the best way to reach you?",
-      "followUpValue": "NONE"
-    },
-    {
-      "key": "contact",
-      "type": "text",
-      "value": "Your Contact",
-      "helper": "Please provide your primary contact information.",
-      "followUpValue": "NONE"
-    },
-    {
-      "key": "situation",
-      "type": "textarea",
-      "value": "Please Explain",
-      "helper": "What thoughts are you having?",
-      "followUpValue": "NONE"
-    }
-  ];
-
-
     // Load questions
-    // $.getJSON("data/questions.json", function (questionList) {
+    $.getJSON("data/questions.json", function (questionList) {
 
           // initialize standard form variables on page load
           var helper = $("#helper");
@@ -230,7 +91,6 @@
                 backStack.push(backObject);
               }
 
-              console.log(backStack);
 
 
             }).fadeIn();
@@ -265,7 +125,6 @@
           function back() {
             // the LAST object on the backstack is the current question
             current = backStack[backStack.length-1]; // grab last object
-            console.log(current);
             backStack.pop(); // remove it
             prev = backStack[backStack.length-1]; // get the previous object
             ix = getInputIndex(prev.type);
@@ -366,4 +225,4 @@
             return false;
           });
 
-    // });
+    });
