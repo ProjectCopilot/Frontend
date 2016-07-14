@@ -96,6 +96,8 @@
 
 
             var input = mainInput[ix].val();
+            console.log(questionQueue[currentQuestion]);
+            console.log(input, questionQueue[currentQuestion].followUpValue);
             q_prev = input;
 
             // add data to inputJSON, the object that will eventually be sent up to the server
@@ -103,7 +105,7 @@
 
             // iteratively move through all of the questions
             if (mainInput[ix].val() == questionQueue[currentQuestion].followUpValue && questionQueue[currentQuestion].followUpValue !== "NONE") {
-
+              console.log(input, true);
               var followUpArray = questionQueue[currentQuestion].followUpQuestions;
 
               questionQueue.length = 0; // wipe array
@@ -121,7 +123,7 @@
           }
 
 
-
+          // How to go back in time (without having to go 88 mph)
           function back() {
             // the LAST object on the backstack is the current question
             var current = backStack[backStack.length-1]; // grab last object
@@ -129,6 +131,8 @@
             var prev = backStack[backStack.length-1]; // get the previous object
             ix = getInputIndex(prev.type);
             currentQuestion = prev.currentIndex;
+            questionQueue = prev.queue;
+            console.log(prev.queue);
 
             helper.text(prev.helper);
 
