@@ -13,6 +13,9 @@ var validate = {
   phone: function(phone) {
     return phoneUtils.isValidNumber(phone, "US");
   },
+  contact: function(type, c) {
+    return type.toLower() == "sms" ? phone(c) : email(c);
+  },
   string: function(s) {
     return typeof s == "string" ? true : false;
   },
