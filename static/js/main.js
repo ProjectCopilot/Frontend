@@ -180,9 +180,7 @@
               if (currentQuestion < queueLength) {
                 helper.text(questionQueue[currentQuestion].helper);
 
-                  q_prev = currentQuestion !== 0 || _.isEqual(questionList, questionQueue) ? q_prev : "NONE";
-                  // var queueExt = q_prev !== "NONE" ? questionQueue : questionList;
-
+                  // q_prev = currentQuestion !== 0 || _.isEqual(questionList, questionQueue) ? q_prev : "NONE";
 
                   var backObject = questionQueue[currentQuestion];
                   backObject["queue"] = questionQueue.slice();
@@ -226,7 +224,7 @@
                 $("#submit").fadeIn();
 
                 var backObject = questionQueue[currentQuestion] ? questionQueue[currentQuestion] : {"key": "finish"};
-                backObject["queue"] = questionQueue;
+                backObject["queue"] = questionQueue.slice();
                 backObject["currentIndex"] = currentQuestion;
                 backObject["previousValue"] = q_prev;
                 backStack.push(backObject);
@@ -248,12 +246,10 @@
 
             // iteratively move through all of the questions
             if (mainInput[ix].val() == questionQueue[currentQuestion].followUpValue && questionQueue[currentQuestion].followUpValue !== "NONE") {
-              var followUpArray = questionQueue[currentQuestion].followUpQuestions;
+              var followUpArray = questionQueue[currentQuestion].followUpQuestions.slice();
 
               questionQueue.length = 0; // wipe array
-              for (var k = 0; k < followUpArray.length; k++) {
-                  questionQueue.push(followUpArray[k]);
-              }
+              questionQueue = followUpArray.slice();
 
               currentQuestion = 0;
 
@@ -269,12 +265,12 @@
           function back() {
             // the LAST object on the backstack is the current question
             current = backStack[backStack.length-1]; // grab last object
+            console.log(current);
             backStack.pop(); // remove it
             prev = backStack[backStack.length-1]; // get the previous object
             ix = getInputIndex(prev.type);
             currentQuestion = prev.currentIndex;
             questionQueue = prev.queue.slice();
-            console.log("Backed", questionQueue);
 
             helper.text(prev.helper);
 
