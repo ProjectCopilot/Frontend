@@ -1,19 +1,6 @@
   // Project Copilot Concierge Client
   // Copyright 2016 Project Copilot
 
-  // Contact information validation helper methods
-  var contactValidate = {
-    email: function(mail) {
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-      {
-        return true;
-      }
-        return false;
-    },
-    phone: function(phone) {
-      return phoneUtils.isValidNumber(phone, "US");
-    }
-  }
 
     // Load questions
     $.getJSON("data/questions.json", function (questionList) {
