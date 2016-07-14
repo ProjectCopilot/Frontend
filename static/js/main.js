@@ -123,8 +123,38 @@
 
 
           function back() {
-            // whatever object is LAST on the backstack is the current question
+            // the LAST object on the backstack is the current question
+            var current = backStack[backStack.length-1]; // grab last object
+            backStack.pop(); // remove it
+            var prev = backStack[backStack.length-1]; // get the previous object
+            ix = getInputIndex(prev.type);
+
+            helper.text(prev.helper);
+
+            if (ix == 1) {
+              mainInput[0].css("display", "none");
+              mainInput[1].css("display", "inline-block");
+              mainInput[2].css("display", "none");
+              $("#mainOption").html("<option value=\"\" id=\"optionHelper\" disabled selected>Option Placeholder</option>");
+              $("#optionHelper").text(prev.value);
+              for (var i = 0; i < prev.options.length; i++) {
+                mainInput[ix].append('<option value="'+prev.options[i]+'">'+prev.options[i]+'</option>');
+              }
+            } else if (ix == 0) {
+              mainInput[0].css("display", "inline-block");
+              mainInput[1].css("display", "none");
+              mainInput[2].css("display", "none");
+              mainInput[ix].val(current.previousValue).attr("placeholder", prev.value);
+
+            } else if (ix == 2) {
+              mainInput[2].css("display", "block");
+              mainInput[0].css("display", "none");
+              mainInput[1].css("display", "none");
+              mainInput[ix].val(current.previousValue).attr("placeholder", prev.value);
+            }
+
             console.log(backStack);
+
           }
 
 
