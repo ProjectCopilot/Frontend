@@ -95,6 +95,10 @@ em {
   margin: 0 0px 15px 0px;
   width: -webkit-calc(100% - 120px);
   width: calc(100% - 120px);
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
 }
 
 .contact .inputButton {
@@ -130,6 +134,20 @@ em {
   vertical-align: top;
 }
 
+.contact #backButton {
+  opacity: 0.5!important;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  display:none;
+}
+
+.contact #backButton:hover {
+  opacity: 1.0!important;
+  cursor:pointer;
+}
+
 .contact select option:first-child {
   color: #999;
 }
@@ -146,6 +164,7 @@ em {
   font-family: "Open Sans";
   padding: 8px 8px 8px 8px;
   margin: 0 auto;
+  margin-top: 10px;
   margin-bottom: 15px;
   width: 90%;
   border-radius: 3px;
@@ -183,4 +202,10 @@ button:hover {
 
 #requestForm {
   text-align:center;
+}
+
+@media (max-width: 512px) {
+  #backLabel {
+    display:none;
+  }
 }
