@@ -40,9 +40,13 @@
             helper.fadeOut(function() {
               if (currentQuestion < queueLength) {
                 helper.text(questionQueue[currentQuestion].helper);
+
                 // Is the question type an option or a textfield?
                 ix = getInputIndex(questionQueue[currentQuestion].type);
-                console.log(currentQuestion, questionQueue[currentQuestion].type, ix);
+                // console.log(currentQuestion, questionQueue[currentQuestion].type, ix);
+
+
+
                 queueLength = questionQueue.length;
 
                 if (ix == 1) {
@@ -87,6 +91,7 @@
             if (mainInput[ix].val() == questionQueue[currentQuestion].followUpValue && questionQueue[currentQuestion].followUpValue !== "NONE") {
 
               var followUpArray = questionQueue[currentQuestion].followUpQuestions;
+
               questionQueue.length = 0; // wipe array
               for (var k = 0; k < followUpArray.length; k++) {
                   questionQueue.push(followUpArray[k]);
@@ -102,8 +107,20 @@
           }
 
 
+
+          function back() {
+            var current = questionQueue[currentQuestion];
+            console.log(current);
+          }
+
+
+
+
+
           // load initial question
           next();
+
+
 
 
           // Standard handlers for when the user hits return or "OK"
@@ -118,6 +135,12 @@
                 next();
               }
           });
+
+          // Back button handler
+          $(".contact #backButton").click(function() {
+            back();
+          });
+
 
 
 
