@@ -128,6 +128,7 @@
             backStack.pop(); // remove it
             var prev = backStack[backStack.length-1]; // get the previous object
             ix = getInputIndex(prev.type);
+            currentQuestion = prev.currentIndex;
 
             helper.text(prev.helper);
 
@@ -140,17 +141,25 @@
               for (var i = 0; i < prev.options.length; i++) {
                 mainInput[ix].append('<option value="'+prev.options[i]+'">'+prev.options[i]+'</option>');
               }
+              $("#mainOption").val(current.previousValue);
+              $("#mainFieldSubmit").show();
+              $("#submit").hide();
+
             } else if (ix == 0) {
               mainInput[0].css("display", "inline-block");
               mainInput[1].css("display", "none");
               mainInput[2].css("display", "none");
               mainInput[ix].val(current.previousValue).attr("placeholder", prev.value);
+              $("#mainFieldSubmit").show();
+              $("#submit").hide();
 
             } else if (ix == 2) {
               mainInput[2].css("display", "block");
               mainInput[0].css("display", "none");
               mainInput[1].css("display", "none");
               mainInput[ix].val(current.previousValue).attr("placeholder", prev.value);
+              $("#mainFieldSubmit").show();
+              $("#submit").hide();
             }
 
             console.log(backStack);
