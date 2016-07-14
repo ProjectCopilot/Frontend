@@ -12,5 +12,11 @@ var validate = {
   },
   phone: function(phone) {
     return phoneUtils.isValidNumber(phone, "US");
+  },
+  string: function(s) {
+    return typeof s == "string" ? true : false;
+  },
+  number: function(n) {
+    return isNaN(parseInt(n, 10)) ? false : true;
   }
 }
