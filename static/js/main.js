@@ -14,13 +14,14 @@
           ];
           var inputJSON = {};
           var questionQueue = [];
+          var backStack = [];
           for (var j = 0; j < questionList.length; j++) {
             questionQueue.push(questionList[j]);
           }
           var currentQuestion = 0;
           var queueLength = questionQueue.length;
           var ix = getInputIndex(questionQueue[currentQuestion].type);
-
+          var q_prev = '';
 
           // return ix given type
           function getInputIndex(type) {
@@ -41,11 +42,17 @@
               if (currentQuestion < queueLength) {
                 helper.text(questionQueue[currentQuestion].helper);
 
+                  q_prev = currentQuestion !== 0 || (JSON.stringify(questionQueue) !== JSON.stringify(questionList)) ? q_prev : "NONE";
+
+                  var backObject = questionQueue[currentQuestion];
+                  backObject["queue"] = questionQueue;
+                  backObject["currentIndex"] = currentQuestion;
+                  backObject["previousValue"] = q_prev;
+                  backStack.push(backObject);
+
                 // Is the question type an option or a textfield?
                 ix = getInputIndex(questionQueue[currentQuestion].type);
                 // console.log(currentQuestion, questionQueue[currentQuestion].type, ix);
-
-
 
                 queueLength = questionQueue.length;
 
@@ -76,6 +83,12 @@
                 mainInput[ix].val("").hide();
                 $("#mainFieldSubmit").hide();
                 $("#submit").fadeIn();
+
+                var backObject = questionQueue[currentQuestion] ? questionQueue[currentQuestion] : {"key": "finish"};
+                backObject["queue"] = questionQueue;
+                backObject["currentIndex"] = currentQuestion;
+                backObject["previousValue"] = q_prev;
+                backStack.push(backObject);
               }
 
             }).fadeIn();
@@ -83,6 +96,7 @@
 
 
             var input = mainInput[ix].val();
+            q_prev = input;
 
             // add data to inputJSON, the object that will eventually be sent up to the server
             inputJSON[questionQueue[currentQuestion].key] = input;
@@ -109,8 +123,8 @@
 
 
           function back() {
-            var current = questionQueue[currentQuestion];
-            console.log(current);
+            // whatever object is LAST on the backstack is the current question
+            console.log(backStack);
           }
 
 
