@@ -17,7 +17,7 @@
 
     // Load questions
     $.getJSON("data/questions.json", function (questionList) {
-    
+
           // initialize standard form variables on page load
           var helper = $("#helper");
           var mainInput = [
@@ -90,6 +90,7 @@
             }).fadeIn();
 
 
+
             var input = mainInput[ix].val();
 
             // add data to inputJSON, the object that will eventually be sent up to the server
@@ -142,20 +143,19 @@
               type: "POST",
               url: "http://localhost:3000/api/addUserRequest",
               data: inputJSON,
-              error: function(err) { // Not sure why, but the response always gets passed through the error method (even if it was successful)
-                if (err.status == 200) { // if everything's all good, then fade everything out and redirect to the beginning of the form
-                  helper.text("Successfully submitted.");
-                  setTimeout(function() {
-                      $("body").fadeOut(function() {
-                        location.href = "/";
-                      });
-                  }, 1000);
-                } else { // something bad happened
-                  console.log(err);
-                  helper.html("There was an error submitting. Try again later.");
-                }
+              error: function(err) { // Something went wrong
+                console.log(err);
+                helper.html("There was an error submitting. Try again later.");
               },
-              dataType: 'json',
+              success: function() { // if everything's all good, then fade everything out and redirect to the beginning of the form
+                helper.text("Successfully submitted.");
+                setTimeout(function() {
+                    $("body").fadeOut(function() {
+                      location.href = "/";
+                    });
+                }, 1000);
+              },
+              dataType: 'html',
             });
 
             return false;
