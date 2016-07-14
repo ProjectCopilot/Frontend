@@ -18,14 +18,11 @@
               <div class="row">
                 <div class="whole columns">
                   <input type="text" id="mainField" placeholder="Yes or No" autocomplete="off" required/>
-                  <select id="mainOption">
-                    <option value="" disabled selected>Option Placeholder</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </select>
+                  <select id="mainOption"></select>
+                  <textarea id="mainTextArea" placeholder="Please Explain..." required></textarea>
+
                   <button class="inputButton" id="mainFieldSubmit">OK</button>
-                  
+
                   <!-- <input type="text" name="age" placeholder="Age"/>
                   <select name="gender">
                     <option value="" disabled selected>Gender</option>
@@ -59,6 +56,7 @@
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="//cdn.rawgit.com/nathanhammond/libphonenumber/master/dist/libphonenumber.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

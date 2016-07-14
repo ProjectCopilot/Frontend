@@ -59,16 +59,25 @@ em {
     color: #f33;
 }
 
+#helper {
+  display:none;
+  line-height: 140%;
+}
+
 .contact {
   margin-top: 25px;
 }
 
 .contact #mainField {
-
+  display:none;
 }
 
 .contact #mainOption {
-    display:none;
+  display:none;
+}
+
+.contact #mainTextArea {
+  display:none;
 }
 
 .contact input, select {
@@ -118,24 +127,8 @@ em {
   padding: 10px 0px 10px 0px;
   width: 100%;
   font-size: 14pt;
+  vertical-align: top;
 }
-
-/*.contact select {
-  appearance:none;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-  background-color: transparent;
-  font-size: 14pt;
-  font-family: "Open Sans";
-  color: #999;
-  border-radius: 0;
-  padding: 4px;
-  border: 0;
-  border-bottom: 2px solid rgba(33, 33, 33, 0.2);
-  margin: 0 0px 15px 0px;
-  width: 100%;
-
-}*/
 
 .contact select option:first-child {
   color: #999;
@@ -151,17 +144,21 @@ em {
   resize: none;
   font-size: 14pt;
   font-family: "Open Sans";
-  width: 100%;
-  border: 0;
-  /*border-top: 2px solid rgba(33, 33, 33, 0.2);*/
+  padding: 8px 8px 8px 8px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  width: 90%;
+  border-radius: 3px;
+  /*width: calc(100% - 120px);*/
+  border: 1px solid rgba(33, 33, 33, 0.1);
+  /*border-bottom: 2px solid rgba(33, 33, 33, 0.2);*/
   height: 200px;
 }
 
 .contact textarea:focus {
   outline:none;
-  /*border-bottom: 2px solid #e74c3c;*/
+  border-bottom: 2px solid #3498db;
   color: #3498db;
-  color: #999;
 }
 
 .contact button:hover {
