@@ -36,10 +36,21 @@
             }
           }
 
+          function validateQuestion(question, value) {
+            var valid = false;
+            if (question.validator == "contact") {
+              valid = validate[question.validator](inputJSON[question.key == "referer_contact" ? "referer_contactMethod" : "contactMethod"], value);
+            } else {
+              valid = question.validator in validate ? validate[question.validator](value) : false;
+            }
+
+            return valid;
+          }
+
 
           // Process current question and pull up next question
           function next() {
-            
+
             helper.fadeOut(function() {
               if (currentQuestion < queueLength) {
 
@@ -201,20 +212,24 @@
 
           // Standard handlers for when the user hits return or "OK"
           $('.contact input').keyup(function(e){
-            if (e.keyCode == 13 && mainInput[ix].val().length !== 0) {
-              next();
-            }
+              if (e.keyCode == 13 && validateQuestion(questionQueue[currentQuestion], mainInput[ix].val())) {
+                next();
+              } else {
+                console.log("Invalid.");
+              }
           });
 
           $("#mainFieldSubmit").click(function() {
-              if (mainInput[ix].val() !== '' && mainInput[ix].val() !== null) {
+              if (validateQuestion(questionQueue[currentQuestion], mainInput[ix].val())) {
                 next();
+              } else {
+                console.log("Invalid.");
               }
           });
 
           // Back button handler
           $(".contact #backButton").click(function() {
-            back();
+              back();
           });
 
 
@@ -248,10 +263,3 @@
           });
 
     });
-
-
-    // get function names as a string
-    Function.prototype.getName = function(){
-      // Find zero or more non-paren chars after the function start
-      return /function ([^(]*)/.exec( this+"" )[1];
-    };
