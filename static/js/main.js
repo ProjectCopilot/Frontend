@@ -39,7 +39,7 @@
 
           // Process current question and pull up next question
           function next() {
-
+            
             helper.fadeOut(function() {
               if (currentQuestion < queueLength) {
 
@@ -59,7 +59,6 @@
 
                 // Is the question type an option or a textfield?
                 ix = getInputIndex(questionQueue[currentQuestion].type);
-                // console.log(currentQuestion, questionQueue[currentQuestion].type, ix);
 
                 queueLength = questionQueue.length;
 
@@ -72,17 +71,24 @@
                   for (var i = 0; i < questionQueue[currentQuestion].options.length; i++) {
                     mainInput[ix].append('<option value="'+questionQueue[currentQuestion].options[i]+'">'+questionQueue[currentQuestion].options[i]+'</option>');
                   }
+
+                  if (questionQueue[currentQuestion].key in inputJSON) mainInput[ix].val(inputJSON[questionQueue[currentQuestion].key]);
+
                 } else if (ix == 0) {
                   mainInput[0].css("display", "inline-block");
                   mainInput[1].css("display", "none");
                   mainInput[2].css("display", "none");
                   mainInput[ix].val("").attr("placeholder", questionQueue[currentQuestion].value);
 
+                  if (questionQueue[currentQuestion].key in inputJSON) mainInput[ix].val(inputJSON[questionQueue[currentQuestion].key]);
+
                 } else if (ix == 2) {
                   mainInput[2].css("display", "block");
                   mainInput[0].css("display", "none");
                   mainInput[1].css("display", "none");
                   mainInput[ix].val("").attr("placeholder", questionQueue[currentQuestion].value);
+
+                  if (questionQueue[currentQuestion].key in inputJSON) mainInput[ix].val(inputJSON[questionQueue[currentQuestion].key]);
                 }
 
               } else {
@@ -105,6 +111,8 @@
 
 
             var input = mainInput[ix].val();
+
+
 
             q_prev = input;
 
@@ -240,3 +248,10 @@
           });
 
     });
+
+
+    // get function names as a string
+    Function.prototype.getName = function(){
+      // Find zero or more non-paren chars after the function start
+      return /function ([^(]*)/.exec( this+"" )[1];
+    };
