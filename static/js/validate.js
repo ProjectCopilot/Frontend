@@ -13,8 +13,11 @@ var validate = {
   phone: function(phone) {
     return phoneUtils.isValidNumber(phone, "US");
   },
+  contact: function(type, c) {
+    return type.toLowerCase() == "sms" ? validate["phone"](c) : validate["email"](c);
+  },
   string: function(s) {
-    return typeof s == "string" ? true : false;
+    return typeof s == "string" && s.length !== 0 ? true : false;
   },
   number: function(n) {
     return isNaN(parseInt(n, 10)) ? false : true;

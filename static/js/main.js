@@ -36,6 +36,17 @@
             }
           }
 
+          function validateQuestion(question, value) {
+            var valid = false;
+            if (question.validator == "contact") {
+              valid = validate[question.validator](inputJSON[question.key == "referer_contact" ? "referer_contactMethod" : "contactMethod"], value);
+            } else {
+              valid = question.validator in validate ? validate[question.validator](value) : false;
+            }
+
+            return valid;
+          }
+
 
           // Process current question and pull up next question
           function next() {
@@ -59,7 +70,6 @@
 
                 // Is the question type an option or a textfield?
                 ix = getInputIndex(questionQueue[currentQuestion].type);
-                // console.log(currentQuestion, questionQueue[currentQuestion].type, ix);
 
                 queueLength = questionQueue.length;
 
@@ -72,17 +82,24 @@
                   for (var i = 0; i < questionQueue[currentQuestion].options.length; i++) {
                     mainInput[ix].append('<option value="'+questionQueue[currentQuestion].options[i]+'">'+questionQueue[currentQuestion].options[i]+'</option>');
                   }
+
+                  if (questionQueue[currentQuestion].key in inputJSON) mainInput[ix].val(inputJSON[questionQueue[currentQuestion].key]);
+
                 } else if (ix == 0) {
                   mainInput[0].css("display", "inline-block");
                   mainInput[1].css("display", "none");
                   mainInput[2].css("display", "none");
                   mainInput[ix].val("").attr("placeholder", questionQueue[currentQuestion].value);
 
+                  if (questionQueue[currentQuestion].key in inputJSON) mainInput[ix].val(inputJSON[questionQueue[currentQuestion].key]);
+
                 } else if (ix == 2) {
                   mainInput[2].css("display", "block");
                   mainInput[0].css("display", "none");
                   mainInput[1].css("display", "none");
                   mainInput[ix].val("").attr("placeholder", questionQueue[currentQuestion].value);
+
+                  if (questionQueue[currentQuestion].key in inputJSON) mainInput[ix].val(inputJSON[questionQueue[currentQuestion].key]);
                 }
 
               } else {
@@ -105,6 +122,8 @@
 
 
             var input = mainInput[ix].val();
+
+
 
             q_prev = input;
 
@@ -193,20 +212,24 @@
 
           // Standard handlers for when the user hits return or "OK"
           $('.contact input').keyup(function(e){
-            if (e.keyCode == 13 && mainInput[ix].val().length !== 0) {
-              next();
-            }
+              if (e.keyCode == 13 && validateQuestion(questionQueue[currentQuestion], mainInput[ix].val())) {
+                next();
+              } else {
+                console.log("Invalid.");
+              }
           });
 
           $("#mainFieldSubmit").click(function() {
-              if (mainInput[ix].val() !== '' && mainInput[ix].val() !== null) {
+              if (validateQuestion(questionQueue[currentQuestion], mainInput[ix].val())) {
                 next();
+              } else {
+                console.log("Invalid.");
               }
           });
 
           // Back button handler
           $(".contact #backButton").click(function() {
-            back();
+              back();
           });
 
 
