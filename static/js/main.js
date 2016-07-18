@@ -1,6 +1,10 @@
-"use strict";
+  "use strict";
+
   // Project Copilot Concierge Client
   // Copyright 2016 Project Copilot
+
+  var HOSTNAME = "{HOSTNAME}";
+  var PORT = "{PORT}";
 
     // Load questions
     $.getJSON("data/questions.json", function (questionList) {
@@ -242,7 +246,7 @@
             // make the call
             $.ajax({
               type: "POST",
-              url: "http://localhost:3000/api/addUserRequest",
+              url: "http://"+HOSTNAME+":"+PORT+"/api/addUserRequest",
               data: inputJSON,
               error: function(err) { // Something went wrong
                 console.log(err);
