@@ -28,7 +28,7 @@
         "type": "text",
         "value": "Their Age",
         "helper": "How old are they?",
-        "validator": "contact",
+        "validator": "number",
         "followUpValue": "NONE"
       },
       {
