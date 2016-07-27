@@ -99,6 +99,7 @@ em {
   -moz-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
   -ms-transition: all 0.1s linear;
+  
 }
 
 .contact .inputButton {
@@ -172,11 +173,15 @@ em {
   border: 1px solid rgba(33, 33, 33, 0.1);
   /*border-bottom: 2px solid rgba(33, 33, 33, 0.2);*/
   height: 200px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
 }
 
 .contact textarea:focus {
   outline:none;
-  border-bottom: 2px solid #3498db;
+  border: 2px solid #3498db;
   color: #3498db;
 }
 
