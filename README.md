@@ -1,5 +1,7 @@
 Concierge
 =========
+A glorified web form with a clean design. Allows users to submit requests to be processed by volunteers.
+
 
 ### Setup
 Populate ```.env``` file in project root.
