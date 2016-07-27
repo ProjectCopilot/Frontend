@@ -99,7 +99,20 @@ em {
   -moz-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
   -ms-transition: all 0.1s linear;
-  
+
+}
+
+.feedbackMessage {
+  border-left: 5px solid #e74c3c;
+  width: 300px;
+  margin: auto;
+  background-color: rgba(127, 140, 141,1.0);
+  color: rgba(236, 240, 241,1.0);
+  padding: 7px;
+  font-size: 12pt;
+  font-weight: 300;
+  max-width: 100%;
+  display:none;
 }
 
 .contact .inputButton {

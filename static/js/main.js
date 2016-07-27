@@ -155,7 +155,7 @@
           function back() {
             if (q_count > 0) {
               q_count--;
-              console.log(q_count);
+
               if (q_count == 0) {
                 $("#backButton").css("display", "none");
               }
@@ -216,18 +216,28 @@
 
           // Standard handlers for when the user hits return or "OK"
           $('.contact input').keyup(function(e){
-              if (e.keyCode == 13 && validateQuestion(questionQueue[currentQuestion], mainInput[ix].val())) {
-                next();
-              } else {
-                console.log("Invalid.");
+              if (e.keyCode == 13) {
+                if (validateQuestion(questionQueue[currentQuestion], mainInput[ix].val())) {
+                  $(".feedbackMessage").fadeOut(function() {
+                    $(this).css('display', 'none');
+                  });
+                  next();
+                } else {
+                  $(".feedbackMessage").fadeIn();
+                  $(".feedback").text("Invalid " + questionQueue[currentQuestion].key + ".");
+                }
               }
           });
 
           $("#mainFieldSubmit").click(function() {
               if (validateQuestion(questionQueue[currentQuestion], mainInput[ix].val())) {
+                $(".feedbackMessage").fadeOut(function() {
+                  $(this).css('display', 'none');
+                });
                 next();
               } else {
-                console.log("Invalid.");
+                $(".feedbackMessage").fadeIn();
+                $(".feedback").text("Invalid " + questionQueue[currentQuestion].key + ".");
               }
           });
 
