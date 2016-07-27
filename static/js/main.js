@@ -55,7 +55,7 @@
           // Process current question and pull up next question
           function next() {
 
-            helper.fadeOut(function() {
+            helper.fadeOut(200, function() {
               if (currentQuestion < queueLength) {
 
                 if (q_count > -1) $("#backButton").css("display", "inline-block");
@@ -63,14 +63,12 @@
 
                 helper.text(questionQueue[currentQuestion].helper);
 
-                  // q_prev = currentQuestion !== 0 || _.isEqual(questionList, questionQueue) ? q_prev : "NONE";
+                var backObject = questionQueue[currentQuestion];
+                backObject["queue"] = questionQueue.slice();
 
-                  var backObject = questionQueue[currentQuestion];
-                  backObject["queue"] = questionQueue.slice();
-                  // console.log("Next", questionQueue);
-                  backObject["currentIndex"] = currentQuestion;
-                  backObject["previousValue"] = q_prev;
-                  backStack.push(backObject);
+                backObject["currentIndex"] = currentQuestion;
+                backObject["previousValue"] = q_prev;
+                backStack.push(backObject);
 
                 // Is the question type an option or a textfield?
                 ix = getInputIndex(questionQueue[currentQuestion].type);
@@ -121,7 +119,7 @@
 
 
 
-            }).fadeIn();
+            }).fadeIn(200);
 
 
 
@@ -226,14 +224,14 @@
 
               if (e.keyCode == 13) {
                 if (validateQuestion(questionQueue[currentQuestion], mainInput[ix].val())) {
-                  $(".feedbackMessage").fadeOut(function() {
+                  $(".feedbackMessage").fadeOut(100, function() {
                     $(this).css('display', 'none');
                     mainInput[ix].css('border-bottom', '2px solid #3498db');
                     mainInput[ix].css('color', '#3498db');
                   });
                   next();
                 } else {
-                  $(".feedbackMessage").fadeIn();
+                  $(".feedbackMessage").fadeIn(100);
                   $(".feedback").text("Invalid " + questionQueue[currentQuestion].key + ".");
                   mainInput[ix].css('border-bottom', '2px solid #e74c3c');
                   mainInput[ix].css('color', '#e74c3c');
@@ -250,7 +248,7 @@
                 });
                 next();
               } else {
-                $(".feedbackMessage").fadeIn();
+                $(".feedbackMessage").fadeIn(100);
                 $(".feedback").text("Invalid " + questionQueue[currentQuestion].key + ".");
                 mainInput[ix].css('border-bottom', '2px solid #e74c3c');
                 mainInput[ix].css('color', '#e74c3c');
