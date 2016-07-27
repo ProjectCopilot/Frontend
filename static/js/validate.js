@@ -8,7 +8,11 @@ var validate = {
     return re.test(mail);
   },
   phone: function(phone) {
-    return phoneUtils.isValidNumber(phone, "US");
+    try {
+      return phoneUtils.isValidNumber(phone, "US");
+    } catch (err) {
+      return false;
+    }
   },
   contact: function(type, c) {
     return type.toLowerCase() == "sms" ? validate["phone"](c) : validate["email"](c);
