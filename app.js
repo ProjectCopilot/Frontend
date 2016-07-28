@@ -22,6 +22,5 @@ app.use('/', express.static(__dirname+'/static'));
 
 
 app.listen(process.env.PORT, process.env.HOSTNAME, function () {
-  console.log('Copilot Concierge service successfully running at '
-      + process.env.HOSTNAME + ':' + process.env.PORT);
+  console.log(('Copilot Concierge running at ').blue + (process.env.HOSTNAME+":"+process.env.PORT).magenta);
 });
