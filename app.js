@@ -2,6 +2,7 @@
 
 var express = require('express');
 var app = express();
+var colors = require('colors');
 var dotenv = require('dotenv').config({path: __dirname+'/.env'});
 var fs = require('fs');
 
