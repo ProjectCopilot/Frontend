@@ -21,5 +21,3 @@ Run the app.
 ```
 $ node app.js
 ```
-
-(Or you can just run `deploy.sh` :wink:)
