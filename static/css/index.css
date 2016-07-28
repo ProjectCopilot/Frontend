@@ -60,59 +60,58 @@ em {
 }
 
 #helper {
-  display:none;
-  line-height: 140%;
+    display:none;
+    line-height: 140%;
 }
 
 .contact {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 .contact #mainField {
-  display:none;
+    display:none;
 }
 
 .contact #mainOption {
-  display:none;
+    display:none;
 }
 
 .contact #mainTextArea {
-  display:none;
+    display:none;
 }
 
 .contact input, select {
-  appearance:none;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-  background-color: transparent;
-  border-radius: 0;
-  color: #999;
-  font-size: 14pt;
-  font-family: "Open Sans";
-  padding: 8px 50px 8px 8px;
-  border: 0;
-  border-bottom: 2px solid rgba(33, 33, 33, 0.2);
-  margin: 0 0px 15px 0px;
-  width: -webkit-calc(100% - 120px);
-  width: calc(100% - 120px);
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-  -ms-transition: all 0.1s linear;
-
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    background-color: transparent;
+    border-radius: 0;
+    color: #999;
+    font-size: 14pt;
+    font-family: "Open Sans";
+    padding: 8px 50px 8px 8px;
+    border: 0;
+    border-bottom: 2px solid rgba(33, 33, 33, 0.2);
+    margin: 0 0px 15px 0px;
+    width: -webkit-calc(100% - 120px);
+    width: calc(100% - 120px);
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
 }
 
 .feedbackMessage {
-  border-left: 5px solid #e74c3c;
-  width: 300px;
-  margin: auto;
-  background-color: rgba(127, 140, 141,1.0);
-  color: rgba(236, 240, 241,1.0);
-  padding: 7px;
-  font-size: 12pt;
-  font-weight: 300;
-  max-width: 100%;
-  display:none;
+    border-left: 5px solid #e74c3c;
+    width: 300px;
+    margin: auto;
+    background-color: rgba(127, 140, 141,1.0);
+    color: rgba(236, 240, 241,1.0);
+    padding: 7px;
+    font-size: 12pt;
+    font-weight: 300;
+    max-width: 100%;
+    display:none;
 }
 
 .contact .inputButton {
@@ -130,72 +129,70 @@ em {
 }
 
 .contact input:focus {
-  outline: none;
-  border-bottom: 2px solid #3498db;
-  color: #3498db;
+    outline: none;
+    border-bottom: 2px solid #3498db;
+    color: #3498db;
 }
 
 .contact #submit {
-  font-family: "Open Sans";
-  display:none;
-  border: 1px solid rgba(33, 33, 33, 0.1);
-  border-radius: 4px;
-  background-color: #3498db;
-  color:white;
-  padding: 10px 0px 10px 0px;
-  width: 100%;
-  font-size: 14pt;
-  vertical-align: top;
+    font-family: "Open Sans";
+    display:none;
+    border: 1px solid rgba(33, 33, 33, 0.1);
+    border-radius: 4px;
+    background-color: #3498db;
+    color:white;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+    font-size: 14pt;
+    vertical-align: top;
 }
 
 .contact #backButton {
-  opacity: 0.5!important;
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-  -ms-transition: all 0.1s linear;
-  display:none;
+    opacity: 0.5!important;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    display:none;
 }
 
 .contact #backButton:hover {
-  opacity: 1.0!important;
-  cursor:pointer;
+    opacity: 1.0!important;
+    cursor:pointer;
 }
 
 .contact select option:first-child {
-  color: #999;
+    color: #999;
 }
 
 .contact select:focus {
-  outline: none;
-  border-bottom: 2px solid #3498db;
-  color: #3498db;
+    outline: none;
+    border-bottom: 2px solid #3498db;
+    color: #3498db;
 }
 
 .contact textarea {
-  resize: none;
-  font-size: 14pt;
-  font-family: "Open Sans";
-  padding: 8px 8px 8px 8px;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  width: 90%;
-  border-radius: 3px;
-  /*width: calc(100% - 120px);*/
-  border: 1px solid rgba(33, 33, 33, 0.1);
-  /*border-bottom: 2px solid rgba(33, 33, 33, 0.2);*/
-  height: 200px;
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-  -ms-transition: all 0.1s linear;
+    resize: none;
+    font-size: 14pt;
+    font-family: "Open Sans";
+    padding: 8px 8px 8px 8px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 90%;
+    border-radius: 3px;
+    border: 1px solid rgba(33, 33, 33, 0.1);
+    height: 200px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
 }
 
 .contact textarea:focus {
-  outline:none;
-  border: 2px solid #3498db;
-  color: #3498db;
+    outline:none;
+    border: 2px solid #3498db;
+    color: #3498db;
 }
 
 .contact button:hover {
