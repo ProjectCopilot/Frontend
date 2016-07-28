@@ -273,8 +273,12 @@
               url: "http://"+HOSTNAME+":"+PORT+"/api/addUserRequest",
               data: inputJSON,
               error: function(err) { // Something went wrong
-                console.log(err);
-                helper.html("There was an error submitting. Try again later.");
+                console.log(err.status);
+                if (err.status == 409) { // duplicate entry sent
+                  helper.text("A request has already been submitted. We will be in touch shortly.");
+                } else if (err.status == 500) { // server down
+                  helper.text("Server error. Please try again later.");
+                }
               },
               success: function() { // if everything's all good, then fade everything out and redirect to the beginning of the form
                 helper.text("Successfully submitted.");
