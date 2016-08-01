@@ -151,7 +151,9 @@
         currentQuestion = prev.currentIndex;
         questionQueue = prev.queue.slice();
 
-        helper.text(prev.helper);
+        helper.fadeOut(200, function() {
+          helper.text(prev.helper);
+        }).fadeIn(200);
 
         if (ix == 1) {
           mainInput[0].css('display', 'none');
