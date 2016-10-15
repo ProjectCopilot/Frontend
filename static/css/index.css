@@ -1,5 +1,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css");
 
+@font-face {
+    font-family: 'Proxima Nova Soft Semibold';
+    src: url('/fonts/proxima-nova-soft-semibold.otf');
+}
+
 body {
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
@@ -218,6 +223,13 @@ button:hover {
 
 #requestForm {
   text-align:center;
+}
+
+#logo {
+  font-family: "Proxima Nova Soft Semibold";
+  background: -webkit-linear-gradient(180deg, #2ED157, #2E57D1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media (max-width: 512px) {
