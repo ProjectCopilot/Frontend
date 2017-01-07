@@ -5,8 +5,39 @@
     src: url('/fonts/proxima-nova-soft-semibold.otf');
 }
 
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('/fonts/proxima-nova-semibold.ttf');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('/fonts/proxima-nova-bold.ttf');
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('/fonts/proxima-nova-light.ttf');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('/fonts/proxima-nova-regular.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('/fonts/proxima-nova-regularitalic.ttf');
+    font-weight: 500;
+    font-style: italic;
+}
+
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Proxima Nova", sans-serif;
     font-weight: 300;
 }
 
@@ -94,7 +125,7 @@ em {
     border-radius: 0;
     color: #999;
     font-size: 14pt;
-    font-family: "Open Sans";
+    font-family: "Proxima Nova";
     padding: 8px 50px 8px 8px;
     border: 0;
     border-bottom: 2px solid rgba(33, 33, 33, 0.2);
@@ -124,7 +155,7 @@ em {
     margin-left: 10px;
     font-size: 14pt;
     padding: 8px;
-    font-family: "Open Sans";
+    font-family: "Proxima Nova";
     width: 50px;
     background: #3498db;
     border-radius: 3px;
@@ -141,7 +172,7 @@ em {
 }
 
 .contact #submit {
-    font-family: "Open Sans";
+    font-family: "Proxima Nova";
     display:none;
     border: 1px solid rgba(33, 33, 33, 0.1);
     border-radius: 4px;
@@ -180,7 +211,7 @@ em {
 .contact textarea {
     resize: none;
     font-size: 14pt;
-    font-family: "Open Sans";
+    font-family: "Proxima Nova";
     padding: 8px 8px 8px 8px;
     margin: 0 auto;
     margin-top: 10px;
