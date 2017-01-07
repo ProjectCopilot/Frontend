@@ -227,9 +227,10 @@ button:hover {
 
 #logo {
   font-family: "Proxima Nova Soft Semibold";
-  background: -webkit-linear-gradient(180deg, #2ED157, #2E57D1);
+  background: -webkit-linear-gradient(0deg, #287bd4, #68c779);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display:inline-block;
 }
 
 @media (max-width: 512px) {
