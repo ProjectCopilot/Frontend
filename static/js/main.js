@@ -71,6 +71,8 @@
 
           queueLength = questionQueue.length;
 
+          $('#mainFieldSubmit').show();
+
           if (ix == 1) {
             mainInput[0].css('display', 'none');
             mainInput[1].css('display', 'inline-block');
