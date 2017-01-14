@@ -54,7 +54,9 @@ footer {
     position: absolute;
     top: 100%;
     left: 0;
-    margin-top: -40px;
+    margin-top: -60px;
+    line-height: 140%;
+    display:inline-block;
 }
 
 p {
@@ -132,6 +134,10 @@ em {
     border:0;
     border-bottom: 2px solid transparent;
     -webkit-appearance: none;
+}
+
+.contact .inputButton#mainFieldSubmit {
+  display: none;
 }
 
 .contact input:focus {
@@ -236,5 +242,14 @@ button:hover {
 @media (max-width: 512px) {
   #backLabel {
     display:none;
+  }
+
+  .contact textarea {
+    height: 100px;
+  }
+
+  footer {
+    font-size: .7rem;
+    margin-top: -50px;
   }
 }
