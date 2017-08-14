@@ -1,25 +1,34 @@
 [
   {
+    "key":"immediate_danger",
+    "type": "option",
+    "options": ["No", "Yes"],
+    "value": "Please Select Status",
+    "helper": "Are you or a friend in immediate danger?",
+    "validator": "string",
+    "followUpValue": "Yes", "followUpQuestions": []
+  },
+  {
     "key":"referral",
     "type": "option",
-    "options": ["Yes", "No"],
-    "value": "Referral?",
-    "helper": "Is this personal or are you referring someone else?",
+    "options": ["Myself", "Another person"],
+    "value": "Referral Status",
+    "helper": "Is this referral for yourself or for another person?",
     "validator": "string",
-    "followUpValue": "Yes", "followUpQuestions": [
+    "followUpValue": "Another person", "followUpQuestions": [
       {
         "key":"name",
         "type": "text",
-        "value": "Their Name",
-        "helper": "What's their name?",
+        "value": "This will remain confidential",
+        "helper": "What is their name?",
         "validator": "string",
         "followUpValue": "NONE"
       },
       {
         "key":"referer_name",
         "type": "text",
-        "value": "Your Name",
-        "helper": "What's your name?",
+        "value": "This will remain confidential",
+        "helper": "What is your name?",
         "validator": "string",
         "followUpValue": "NONE"
       },
@@ -54,7 +63,7 @@
         "type": "option",
         "options": ["SMS", "Email"],
         "value": "Preferred Contact",
-        "helper": "What's the best way to reach them?",
+        "helper": "What is the best way to reach them?",
         "validator": "string",
         "followUpValue": "NONE"
       },
@@ -71,7 +80,7 @@
         "type": "option",
         "options": ["SMS", "Email"],
         "value": "Preferred Contact",
-        "helper": "What's the best way to reach you?",
+        "helper": "What is the best way to reach you?",
         "validator": "string",
         "followUpValue": "NONE"
       },
@@ -87,7 +96,7 @@
         "key": "situation",
         "type": "textarea",
         "value": "Please Explain",
-        "helper": "Please provide any additional information.",
+        "helper": "Please provide any additional information or anything that you have noticed about this person.",
         "validator": "string",
         "followUpValue": "NONE"
       }
@@ -96,8 +105,8 @@
   {
     "key":"name",
     "type": "text",
-    "value": "Your Name",
-    "helper": "What's your name?",
+    "value": "It will remain confidential",
+    "helper": "What is your name?",
     "validator": "string",
     "followUpValue": "NONE"
   },
@@ -132,7 +141,7 @@
     "type": "option",
     "options": ["SMS", "Email"],
     "value": "Preferred Contact",
-    "helper": "What's the best way to reach you?",
+    "helper": "What is the best way to reach you?",
     "validator": "string",
     "followUpValue": "NONE"
   },
@@ -148,7 +157,7 @@
     "key": "situation",
     "type": "textarea",
     "value": "Please Explain",
-    "helper": "What thoughts are you having?",
+    "helper": "What have you been experiencing?",
     "validator": "string",
     "followUpValue": "NONE"
   }
