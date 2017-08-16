@@ -3,8 +3,7 @@
 // Project Copilot Concierge Client
 // Copyright 20167Project Copilot
 
-const HOSTNAME = '{HOSTNAME}';
-const PORT = '{PORT}';
+const HOST = '{HOST}';
 
 // Load questions
 $.getJSON('data/questions.json', function (questionList) {
@@ -254,7 +253,7 @@ $.getJSON('data/questions.json', function (questionList) {
     // make the call
     $.ajax({
       type: 'POST',
-      url: 'http://' + HOSTNAME + ':' + PORT + '/api/addUserRequest',
+      url: '//' + HOST + '/api/addUserRequest',
       data: inputJSON,
       error(err) { // Something went wrong
         console.log(err.status);

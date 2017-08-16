@@ -12,8 +12,7 @@ app.get('/js/main.js', function (req, res) {
 
   fs.readFile(__dirname + '/static/js/main.js', 'utf-8', function (e, data) {
     if (e) throw e;
-
-    const load = data.replace(/{HOSTNAME}/g, process.env.MAILROOM_HOSTNAME).replace(/{PORT}/g, process.env.MAILROOM_PORT);
+    const load = data.replace(/{HOST}/g, process.env.MAILROOM_URL);
     res.send(load);
   });
 });
