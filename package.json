@@ -1,5 +1,5 @@
 {
-  "name": "copilot-concierge",
+  "name": "concierge",
   "version": "0.0.1",
   "description": "Copilot Concierge.",
   "main": "app.js",
