@@ -99,7 +99,7 @@ $.getJSON('data/questions.json', function (questionList) {
         }
       } else {
         if (inputJSON.immediate_danger == 'Yes') {
-          helper.html('Call 911 or local emergency services immediately.<br /><br />Crisis Text Line: Text "hello" to 741741');
+          helper.html('Call 911 or local emergency services immediately.<br /><br />National Suicide Hotline: +1 (800) 273-8255');
           mainInput[ix].val('').hide();
           $('#mainFieldSubmit').hide();
           return;
